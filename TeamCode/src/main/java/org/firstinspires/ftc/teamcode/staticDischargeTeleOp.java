@@ -21,7 +21,11 @@ public class staticDischargeTeleOp extends OpMode {
     public DcMotor backLeftMotor = null;
     public DcMotor backRightMotor = null;
     public DcMotor carouselWheel = null;
+    public DcMotor intakeStars = null;
+    public DcMotor intakeBase = null;
     double carouselWheelSpeed = 0;
+    boolean lastUp = true;
+    boolean lastDown = true;
 
 //    public DcMotor lift = null;
 
@@ -88,8 +92,8 @@ public class staticDischargeTeleOp extends OpMode {
         turn = -1 * gamepad1.right_stick_x;
 
 
-        clawOpen = gamepad2.right_bumper;
-        clawClose = gamepad2.left_bumper;
+//        clawOpen = gamepad2.right_bumper;
+//        clawClose = gamepad2.left_bumper;
 
 
         if (gamepad1.right_bumper) {
@@ -99,69 +103,31 @@ public class staticDischargeTeleOp extends OpMode {
             telemetry.addData("Say", "Speed:normal");
         }
 
+        carouselWheel.setPower(.9 * gamepad2.left_stick_y);
 
-        if (gamepad1.dpad_up) {
-            carouselWheel.setPower(carouselWheelSpeed);
-        }
-        if (gamepad1.dpad_down) {
-            carouselWheel.setPower(0);
-        }
-        if (gamepad1.dpad_right) {
-            carouselWheelSpeed = carouselWheelSpeed + 0.1;
 
-            if (carouselWheelSpeed > 1) {
-                carouselWheelSpeed = 1;
-            }
+        telemetry.addData("speed", carouselWheel);
+        telemetry.update();
+
+        lastUp = gamepad1.dpad_up;
+        lastDown = gamepad1.dpad_down;
+
+        if (gamepad2.a) {
+            intakeBase.setPower(1);
+            intakeStars.setPower(1);
         }
-        if (gamepad1.dpad_left) {
-            carouselWheelSpeed = carouselWheelSpeed - 0.1;
-            if (carouselWheelSpeed < -1) {
-                carouselWheelSpeed = -1;
-            }
+        if (gamepad2.b) {
+            intakeBase.setPower(0);
+            intakeStars.setPower(-0);
         }
 
-
-//        if(gamepad2.dpad_up){
-//            lift.setPower(-0.6);
-//        }
-//        if(gamepad2.dpad_down){
-//            lift.setPower(1);
-//        }
-//        else{
-//            lift.setPower(0);
-//        }
-//
-//        telemetry.addData("servo open", clawOpen);
-//        telemetry.addData("servo close", clawClose);
-//
-//        if (clawOpen) {
-//            claw.setPosition(0.5);
-//        }
-//        else if (clawClose)
-//        {
-//            claw.setPosition(0.0);
-//        }
-
-//        turn=turn*0.3;
 
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
 
-//        if (gamepad1.a)
-//            hexMotor.setPower(0.3);
-//        else if (gamepad1.b)
-//            hexMotor.setPower(-0.3);
-//        else
-//            hexMotor.setPower(0.0);
 
-        // Send telemetry message to signify robot running;
-//        telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-//        telemetry.addData("fl", "%.2f", frontLeftMotor);
-//        telemetry.addData("fr", "%.2f", frontRightMotor);
-//        telemetry.addData("bl", "%.2f", backLeftMotor);
-//        telemetry.addData("br", "%.2f", backRightMotor);
 
 
     }
