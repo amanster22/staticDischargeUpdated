@@ -53,7 +53,7 @@ public class StaticDischargeAuto extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double COUNTS_PER_MOTOR_REV = 560;
-    static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
+    static final double DRIVE_GEAR_REDUCTION = 0.5;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 3.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
@@ -101,7 +101,7 @@ public class StaticDischargeAuto extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderHolonomicDrive(0.4,0,0,-10,5);
+        encoderHolonomicDrive(0.4,0,0,-2,5);
         encoderHolonomicDrive(-0.4,40,40,0,5);
         encoderHolonomicDrive(0,0,0,0,1);
         carouselWheel.setPower(0.8);
