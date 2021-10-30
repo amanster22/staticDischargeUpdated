@@ -21,7 +21,7 @@ public class RedStorageUnit extends LinearOpMode {
         waitForStart();
         bot.driveTrain.moveEncoders(0, 12, 0, 0.8);
         sleep(200);
-        bot.driveTrain.moveEncoders(-7, 0, 0, 1);
+        bot.driveTrain.moveEncoders(-12, 0, 0, 0.5);
         sleep(200);
         bot.driveTrain.moveEncoders(0, -12, 0, 0.8);
         sleep(200);
@@ -35,8 +35,9 @@ public class RedStorageUnit extends LinearOpMode {
         }
         //hello from charlie
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 12, 0, 0.8);
-        //bot.driveTrain.moveEncoders(-10.5, 0, 0, 1);
+        bot.driveTrain.moveEncoders(0, 11, 0, 0.8);
+        sleep(200);
+        bot.driveTrain.moveEncoders(-2.5, 0, 0, 0.5);
         //sleep(100);
         //bot.driveTrain.moveEncoders(0,-5,0,0.5);
 
