@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @TeleOp(name = "Avneesh Testing", group = "Linear OpMode")
 public class HopefullyNotFailure extends OpMode {
 
-    public Servo dumping = null;
+    public Servo dumping = null; //does this work
     public DcMotor spinny = null;
     public DcMotor intakeStars = null;
     public DcMotor intakeBase = null;
