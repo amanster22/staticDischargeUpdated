@@ -33,7 +33,7 @@ public class RedStorageUnit extends LinearOpMode {
             telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        //hello from charlie
+
         sleep(500);
         bot.driveTrain.moveEncoders(0, 11, 0, 0.8);
         sleep(200);
