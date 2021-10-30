@@ -112,14 +112,14 @@ public class staticDischargeTeleOp extends OpMode {
         lastUp = gamepad1.dpad_up;
         lastDown = gamepad1.dpad_down;
 
-        if (gamepad2.a) {
-            intakeBase.setPower(1);
-            intakeStars.setPower(1);
-        }
-        if (gamepad2.b) {
-            intakeBase.setPower(0);
-            intakeStars.setPower(-0);
-        }
+//        if (gamepad2.a) {
+//            intakeBase.setPower(1);
+//            intakeStars.setPower(1);
+//        }
+//        if (gamepad2.b) {
+//            intakeBase.setPower(0);
+//            intakeStars.setPower(-0);
+//        }
 
 
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
