@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
-
+@Disabled
 @Autonomous(name = "WarehousePark2")
 public class WarehousePark2 extends LinearOpMode {
 

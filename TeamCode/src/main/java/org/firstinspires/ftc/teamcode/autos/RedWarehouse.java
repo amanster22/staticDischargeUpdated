@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
+import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;@Autonomous(name = "Red Warehouse")
 
-@Autonomous(name = "Blue Warehouse")
+
 public class RedWarehouse extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
