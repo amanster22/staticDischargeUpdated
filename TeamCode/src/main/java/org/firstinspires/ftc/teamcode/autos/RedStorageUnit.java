@@ -21,23 +21,23 @@ public class RedStorageUnit extends LinearOpMode {
         waitForStart();
         bot.driveTrain.moveEncoders(0, 12, 0, 0.8);
         sleep(200);
-        bot.driveTrain.moveEncoders(-12, 0, 0, 0.5);
+        bot.driveTrain.moveEncoders(-9, 0, 0, 0.5);
         sleep(200);
-        bot.driveTrain.moveEncoders(0, -12, 0, 0.8);
+        bot.driveTrain.moveEncoders(0, -11, 0, 0.8);
         sleep(200);
         carouselWheel.setPower(-0.8);
         sleep(3000);
 
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 2.3)) {
             telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 11, 0, 0.8);
+        bot.driveTrain.moveEncoders(0, 8, 0, 0.8);
         sleep(200);
-        bot.driveTrain.moveEncoders(-2.5, 0, 0, 0.5);
+        bot.driveTrain.moveEncoders(-4.5, 0, 0, 0.5);
         //sleep(100);
         //bot.driveTrain.moveEncoders(0,-5,0,0.5);
 
