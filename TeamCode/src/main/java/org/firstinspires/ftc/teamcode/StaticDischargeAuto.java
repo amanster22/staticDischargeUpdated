@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
-
+@Disabled
 @Autonomous(name = "StaticDischargeEncoderAuto", group = "Pushbot")
 //@Disabled
 public class StaticDischargeAuto extends LinearOpMode {

@@ -17,9 +17,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-
-@Autonomous(name = "EncoderHolonomicDrive", group = "StaticDischarge")
 @Disabled
+@Autonomous(name = "EncoderHolonomicDrive", group = "StaticDischarge")
+
 public class encoderAutoTestExample extends LinearOpMode {
 //new message
     /* Declare OpMode members. */

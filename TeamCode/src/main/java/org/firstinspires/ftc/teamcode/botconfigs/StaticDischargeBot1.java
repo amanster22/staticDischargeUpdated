@@ -18,6 +18,6 @@ public class StaticDischargeBot1 {
         DcMotorWrap backLeftMotor = new DcMotorWrap(tele, map, "2", 3, 1, 0.8, 1120);
 //        DcMotorWrap carouselWheel = new DcMotorWrap(tele, map, "carouselWheel", 1, 1, 1, 1120);
         DcMotorWrap[] allMotors = new DcMotorWrap[]{frontRightMotor, backRightMotor, frontLeftMotor, backLeftMotor};
-        driveTrain = new MechDriveTrain(tele, allMotors, 1,1 , 16.5, 1);
+        driveTrain = new MechDriveTrain(tele, allMotors, 1, 1, 16.5, 1);
     }
 }
