@@ -20,9 +20,9 @@ public class BlueWarehouse extends LinearOpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
 
         waitForStart();
-        bot.driveTrain.moveEncoders(11, 0, 0, 1);
+        bot.driveTrain.moveEncoders(-9, 0, 0, 1);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 35, 0, 1);
+        bot.driveTrain.moveEncoders(0, -35, 0, 1);
 
     }
 }

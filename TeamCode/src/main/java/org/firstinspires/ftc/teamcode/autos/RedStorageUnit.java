@@ -26,13 +26,16 @@ public class RedStorageUnit extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, -11, 0, 0.8);
         sleep(200);
         carouselWheel.setPower(-0.8);
-        sleep(3000);
+        sleep(2000);
+        carouselWheel.setPower(0);
 
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.3)) {
-            telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+//        sleep(3000);
+//
+//        runtime.reset();
+//        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+//            telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
+//            telemetry.update();
+//        }
 
         sleep(500);
         bot.driveTrain.moveEncoders(0, 8, 0, 0.8);

@@ -20,14 +20,13 @@ public class BlueStorageUnit extends LinearOpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
 
         waitForStart();
-        bot.driveTrain.moveEncoders(0.8, 0, 0, 1);
+        bot.driveTrain.moveEncoders(0.8, 0, 0, 0.2);
+        sleep(200);
         bot.driveTrain.moveEncoders(0, -12, 0, 0.8);
+        sleep(200);
         carouselWheel.setPower(0.8);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.5)) {
-            telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+        sleep(2000);
+        carouselWheel.setPower(0);
         bot.driveTrain.moveEncoders(10.5, 0, 0, 1);
         sleep(100);
         bot.driveTrain.moveEncoders(0,-5,0,0.5);
