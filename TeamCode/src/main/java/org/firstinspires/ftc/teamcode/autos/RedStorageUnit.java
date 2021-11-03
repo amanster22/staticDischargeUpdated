@@ -38,7 +38,7 @@ public class RedStorageUnit extends LinearOpMode {
 //        }
 
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 9, 0, 0.8);
+        bot.driveTrain.moveEncoders(0, 9.75, 0, 0.8);
         sleep(200);
         bot.driveTrain.moveEncoders(0,0,-0.03,0.5);
         sleep(200);
