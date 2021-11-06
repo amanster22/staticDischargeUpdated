@@ -97,7 +97,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(1, 25.0/9.0);
+            tfod.setZoom(1.5, 4.0/25.0);
         }
         /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
@@ -123,11 +123,16 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                                 recognition.getRight(), recognition.getBottom());
                         if (recognition.getLabel().equals("Duck")) {
                             DuckDetection = true;
-                            telemetry.addData("Object Detected", "Duck");
+                            telemetry.addData("Object Detected 1", "Duck");
+                        }
+                        tfod.setZoom(1, 25.0/9.0);
+                        if (recognition.getLabel().equals("Duck")) {
+                              DuckDetection = true;
+                              telemetry.addData("Object Detected 2", "Duck");
                         }
                         else {
                             DuckDetection = false;
-                            telemetry.addData("Object NOT Detected", "Duck");
+                            telemetry.addData("Object Detected 3", "Duck");
                         }
                       }
                       telemetry.update();
