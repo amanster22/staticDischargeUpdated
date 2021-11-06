@@ -10,7 +10,8 @@ import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 @Autonomous(name = "Blue Warehouse")
 public class BlueWarehouse extends LinearOpMode {
-//Daniel Says hi
+//Daniel
+// Says hi
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     public ElapsedTime runtime = new ElapsedTime();
