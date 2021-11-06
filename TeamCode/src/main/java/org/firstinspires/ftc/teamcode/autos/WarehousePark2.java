@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
-@Disabled
-@Autonomous(name = "WarehousePark2")
+//@Disabled
+@Autonomous(name = "")
 public class WarehousePark2 extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
@@ -17,7 +17,7 @@ public class WarehousePark2 extends LinearOpMode {
 
         waitForStart();
 
-        bot.driveTrain.moveEncoders(8, 0, 0, 1);
-        bot.driveTrain.moveEncoders(0, 37, 0, 1);
+        bot.driveTrain.moveEncoders(0,20,0,0.7);
+        bot.driveTrain.moveEncoders(0,0,0.1,0.7);
     }
 }

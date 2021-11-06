@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autos;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -14,6 +15,7 @@ public class BlueWarehouse extends LinearOpMode {
 // Says hi
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
+    public Servo blockDropper = null;
     public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
 
@@ -21,9 +23,12 @@ public class BlueWarehouse extends LinearOpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
 
         waitForStart();
-        bot.driveTrain.moveEncoders(-9, 0, 0, 1);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, -35, 0, 1);
+        bot.driveTrain.moveEncoders(0,20,0,0.7);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0,0,0.2,0.7);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0,8,0,0.5);
+        blockDropper.setPosition(0.5);
 
     }
 }
