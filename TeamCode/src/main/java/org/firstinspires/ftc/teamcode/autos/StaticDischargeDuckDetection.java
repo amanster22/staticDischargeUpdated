@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -59,9 +60,9 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
    *  FreightFrenzy_BC.tflite  0: Ball,  1: Cube
    *  FreightFrenzy_DM.tflite  0: Duck,  1: Marker
    */
-   public StaticDischargeBot1 bot;
+    public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
-    public ElapsedTime runtime = new ElapsedTime();
+    public Servo flipServo = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
       "Ball",
@@ -113,9 +114,10 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                     if (updatedRecognitions != null) {
                       telemetry.addData("0 Object Detected", updatedRecognitions.size());
                       // step through the list of recognitions and display boundary info.
-                      int i = 3;
+                      int i = 0;
                       boolean DuckDetection = false;
                       for (Recognition recognition : updatedRecognitions) {
+                          tfod.setZoom(1.5, 4.0/25.0);
                         telemetry.addData(String.format("Label (%d)", i), recognition.getLabel());
                         telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
                                 recognition.getLeft(), recognition.getTop());
@@ -124,17 +126,21 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                         if (recognition.getLabel().equals("Duck")) {
                             DuckDetection = true;
                             telemetry.addData("Object Detected 1", "Duck");
+                            /** Add directions if position = 1 */
                         }
                         tfod.setZoom(1, 25.0/9.0);
                         if (recognition.getLabel().equals("Duck")) {
                               DuckDetection = true;
                               telemetry.addData("Object Detected 2", "Duck");
+                              /** Add directions if position = 2 */
                         }
                         else {
                             DuckDetection = false;
                             telemetry.addData("Object Detected 3", "Duck");
+                            /** Add directions if position = 3 */
                         }
                       }
+                      i++;
                       telemetry.update();
                     }
                 }
