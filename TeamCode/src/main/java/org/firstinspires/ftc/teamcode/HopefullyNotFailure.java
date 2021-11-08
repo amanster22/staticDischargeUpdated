@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-@Disabled
+//@Disabled
 @TeleOp(name = "Avneesh Testing", group = "Linear OpMode")
 public class HopefullyNotFailure extends OpMode {
 
@@ -38,24 +38,24 @@ public class HopefullyNotFailure extends OpMode {
 //        {
 //            dumping.setPosition(.6);
 //        }
-        spinny.setPower(gamepad1.left_stick_y * whichSpeed);
-
-        if (gamepad1.dpad_up && !lastUp) {
-            whichSpeed = (whichSpeed + .1);
-        }
-        if (gamepad1.dpad_down && !lastDown) {
-            whichSpeed = (whichSpeed - .1);
-        }
-
-        telemetry.addData("speed", whichSpeed);
-        telemetry.update();
-
-        lastUp = gamepad1.dpad_up;
-        lastDown = gamepad1.dpad_down;
+//        spinny.setPower(gamepad1.left_stick_y * whichSpeed);
+//
+//        if (gamepad1.dpad_up && !lastUp) {
+//            whichSpeed = (whichSpeed + .1);
+//        }
+//        if (gamepad1.dpad_down && !lastDown) {
+//            whichSpeed = (whichSpeed - .1);
+//        }
+//
+//        telemetry.addData("speed", whichSpeed);
+//        telemetry.update();
+//
+//        lastUp = gamepad1.dpad_up;
+//        lastDown = gamepad1.dpad_down;
 
         if (gamepad2.a) {
-            intakeBase.setPower(1);
-            intakeStars.setPower(1);
+            intakeBase.setPower(-.75);
+            intakeStars.setPower(.75);
         }
         if (gamepad2.b) {
             intakeBase.setPower(0);
