@@ -23,7 +23,10 @@ public class staticDischargeTeleOp extends OpMode {
     public DcMotor carouselWheel = null;
     public DcMotor intakeStars = null;
     public DcMotor intakeBase = null;
+    public DcMotor armWheels = null;
+    double starSpeed=0.5;
     double carouselWheelSpeed = 0;
+    double aWheelSpeed = 0.8;
     boolean lastUp = true;
     boolean lastDown = true;
 
@@ -46,6 +49,8 @@ public class staticDischargeTeleOp extends OpMode {
         backLeftMotor = hardwareMap.dcMotor.get("2");
         backRightMotor = hardwareMap.dcMotor.get("3");
         carouselWheel = hardwareMap.dcMotor.get("wheel");
+        intakeStars = hardwareMap.dcMotor.get("stars");
+        armWheels = hardwareMap.dcMotor.get("armwheel");
 //        lift=hardwareMap.dcMotor.get("lift");
 //        claw  = hardwareMap.servo.get("claw");
 //        hexMotor = hardwareMap.dcMotor.get("hex");
@@ -103,6 +108,14 @@ public class staticDischargeTeleOp extends OpMode {
             telemetry.addData("Say", "Speed:normal");
         }
 
+        if (gamepad2.dpad_up) {
+            armWheels.setPower(aWheelSpeed);
+        } else if (gamepad2.dpad_down) {
+            armWheels.setPower(0);
+        }
+
+
+
         carouselWheel.setPower(.9 * gamepad2.left_stick_y);
 
 
@@ -112,14 +125,13 @@ public class staticDischargeTeleOp extends OpMode {
         lastUp = gamepad1.dpad_up;
         lastDown = gamepad1.dpad_down;
 
-//        if (gamepad2.a) {
-//            intakeBase.setPower(1);
-//            intakeStars.setPower(1);
-//        }
-//        if (gamepad2.b) {
-//            intakeBase.setPower(0);
-//            intakeStars.setPower(-0);
-//        }
+        if (gamepad1.a) {
+            starSpeed=starSpeed*-1;
+            intakeStars.setPower(starSpeed);
+        }
+        if(gamepad1.b){
+            intakeStars.setPower(0);
+        }
 
 
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
