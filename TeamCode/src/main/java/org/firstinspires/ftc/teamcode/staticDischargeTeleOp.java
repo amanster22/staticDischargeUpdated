@@ -108,11 +108,6 @@ public class staticDischargeTeleOp extends OpMode {
             telemetry.addData("Say", "Speed:normal");
         }
 
-        if (gamepad2.dpad_up) {
-            armWheels.setPower(aWheelSpeed);
-        } else if (gamepad2.dpad_down) {
-            armWheels.setPower(0);
-        }
 
 
 
@@ -128,9 +123,11 @@ public class staticDischargeTeleOp extends OpMode {
         if (gamepad1.a) {
             starSpeed=starSpeed*-1;
             intakeStars.setPower(starSpeed);
+            armWheels.setPower(aWheelSpeed);
         }
         if(gamepad1.b){
             intakeStars.setPower(0);
+            armWheels.setPower(0);
         }
 
 
