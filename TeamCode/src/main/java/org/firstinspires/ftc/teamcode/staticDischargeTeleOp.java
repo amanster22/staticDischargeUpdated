@@ -3,7 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 
 @TeleOp(name = "Static Discharge Testing", group = "Pushbot")
@@ -24,6 +28,8 @@ public class staticDischargeTeleOp extends OpMode {
     public DcMotor intakeStars = null;
     public DcMotor intakeBase = null;
     public DcMotor armWheels = null;
+    public Servo rollerServo = null;
+    public Servo latchServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
     double aWheelSpeed = 0.8;
@@ -51,6 +57,11 @@ public class staticDischargeTeleOp extends OpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
+        rollerServo = hardwareMap.servo.get("roller");
+        latchServo = hardwareMap.servo.get("latch");
+
+
+
 //        lift=hardwareMap.dcMotor.get("lift");
 //        claw  = hardwareMap.servo.get("claw");
 //        hexMotor = hardwareMap.dcMotor.get("hex");
@@ -60,11 +71,14 @@ public class staticDischargeTeleOp extends OpMode {
         telemetry.addData("Say", "Hello Aman");    //
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
+    /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     @Override
     public void init_loop() {
+
+        latchServo.setPosition(-0.5);
+
+
 
     }
 
@@ -122,14 +136,29 @@ public class staticDischargeTeleOp extends OpMode {
 
         if (gamepad1.a) {
             starSpeed=starSpeed*-1;
+            aWheelSpeed=aWheelSpeed*-1;
             intakeStars.setPower(starSpeed);
             armWheels.setPower(aWheelSpeed);
+            rollerServo.setDirection(Servo.Direction.FORWARD);
+            rollerServo.setPosition(0);
+
+
         }
         if(gamepad1.b){
             intakeStars.setPower(0);
             armWheels.setPower(0);
+
+            rollerServo.setDirection(null);
+            rollerServo.setPosition(0);
+
         }
 
+        if(gamepad1.x){
+            latchServo.setPosition(0.5);
+        }
+        if(gamepad1.y){
+            latchServo.setPosition(-0.5);
+        }
 
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));

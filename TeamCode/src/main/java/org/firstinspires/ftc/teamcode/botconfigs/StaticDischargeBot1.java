@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.hardwarewrap.ServoWrap;
 public class StaticDischargeBot1 {
 
     public MechDriveTrain driveTrain;
-    public ServoWrap blockDropper;
+    public ServoWrap latchServo;
 
     public StaticDischargeBot1(Telemetry tele, HardwareMap map) {
         DcMotorWrap frontRightMotor = new DcMotorWrap(tele, map, "0", 3, 1, 0.8, 420);
@@ -22,6 +22,7 @@ public class StaticDischargeBot1 {
         DcMotorWrap[] allMotors = new DcMotorWrap[]{frontRightMotor, backRightMotor, frontLeftMotor, backLeftMotor};
         driveTrain = new MechDriveTrain(tele, allMotors, 1, 1, 20, 1);
 
-        blockDropper = new ServoWrap(tele, map, "blockDropper", 0, 1);
+//        latchServo = new ServoWrap(tele, map, "latch", 0, 1);
+
     }
 }

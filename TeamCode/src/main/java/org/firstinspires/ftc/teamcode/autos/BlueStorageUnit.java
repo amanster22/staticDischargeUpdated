@@ -14,12 +14,15 @@ public class BlueStorageUnit extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
+    public Servo latchServo = null;
 //    public Servo flipServo = null;
 //    public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
 
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
+        latchServo = hardwareMap.servo.get("latch");
+        latchServo.setPosition(0.5);
 
         waitForStart();
         bot.driveTrain.moveEncoders(9.5, 0, 0, 0.2);
@@ -31,9 +34,9 @@ public class BlueStorageUnit extends LinearOpMode {
         bot.driveTrain.moveEncoders(-1.5,0,0,1);
         sleep(200);
         carouselWheel.setPower(-0.55);
-        sleep(2300);
+        sleep(2500);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(17, 0, 0, 1);
+        bot.driveTrain.moveEncoders(18, 0, 0, 1);
         sleep(100);
 //        flipServo.setPosition(0.5);
 
