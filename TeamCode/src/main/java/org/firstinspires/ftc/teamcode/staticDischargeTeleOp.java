@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -8,18 +7,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
-
 @TeleOp(name = "Static Discharge Testing", group = "Pushbot")
 //@Disabled
-
-
 public class staticDischargeTeleOp extends OpMode {
 
-    /* Declare OpMode members. */
-//    HardwarePushbot robot       = new HardwarePushbot(); // use the class created to define a Pushbot's hardware
-//    double          clawOffset  = 0.0 ;                  // Servo mid position
-//    final double    CLAW_SPEED  = 0.02 ;                 // sets rate to move servo
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
     public DcMotor backLeftMotor = null;
@@ -28,19 +19,15 @@ public class staticDischargeTeleOp extends OpMode {
     public DcMotor intakeStars = null;
     public DcMotor intakeBase = null;
     public DcMotor armWheels = null;
+    public DcMotor arm = null;
     public Servo rollerServo = null;
     public Servo latchServo=null;
+    public Servo paddleServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
     double aWheelSpeed = 0.8;
     boolean lastUp = true;
     boolean lastDown = true;
-
-//    public DcMotor lift = null;
-
-//    public Servo claw = null;
-//    public DcMotor hexMotor = null;
-
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -59,27 +46,18 @@ public class staticDischargeTeleOp extends OpMode {
         armWheels = hardwareMap.dcMotor.get("armwheel");
         rollerServo = hardwareMap.servo.get("roller");
         latchServo = hardwareMap.servo.get("latch");
-
-
-
-//        lift=hardwareMap.dcMotor.get("lift");
-//        claw  = hardwareMap.servo.get("claw");
-//        hexMotor = hardwareMap.dcMotor.get("hex");
-
+        arm = hardwareMap.dcMotor.get("arm");
+        paddleServo = hardwareMap.servo.get("paddle");
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Aman");    //
+        telemetry.addData("Say", "Hello Aman and Daniel. I'm ready!");    //
     }
-
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     @Override
     public void init_loop() {
-
         latchServo.setPosition(-0.5);
-
-
-
+        paddleServo.setPosition(0);
     }
 
     /*
@@ -121,36 +99,37 @@ public class staticDischargeTeleOp extends OpMode {
         } else {
             telemetry.addData("Say", "Speed:normal");
         }
-
-
-
+        if (gamepad2.dpad_up){
+            arm.setPower(0.3);
+        }
+        if(gamepad2.dpad_down){
+            arm.setPower(-0.3);
+        }
 
         carouselWheel.setPower(.9 * gamepad2.left_stick_y);
-
-
         telemetry.addData("speed", carouselWheel);
         telemetry.update();
 
         lastUp = gamepad1.dpad_up;
         lastDown = gamepad1.dpad_down;
 
-        if (gamepad1.a) {
+        if (gamepad1.a) {//intake on
             starSpeed=starSpeed*-1;
             aWheelSpeed=aWheelSpeed*-1;
             intakeStars.setPower(starSpeed);
             armWheels.setPower(aWheelSpeed);
             rollerServo.setDirection(Servo.Direction.FORWARD);
             rollerServo.setPosition(0);
+            telemetry.addData("Intake:", true);
 
 
         }
-        if(gamepad1.b){
+        if(gamepad1.b){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-
             rollerServo.setDirection(null);
             rollerServo.setPosition(0);
-
+            telemetry.addData("Intake:", false);
         }
 
         if(gamepad1.x){
@@ -159,15 +138,11 @@ public class staticDischargeTeleOp extends OpMode {
         if(gamepad1.y){
             latchServo.setPosition(-0.5);
         }
-
+        //Holonomic Drivetrain code
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
-
-
-
-
     }
 
     /*
@@ -177,8 +152,5 @@ public class staticDischargeTeleOp extends OpMode {
     public void stop() {
     }
 }
-
-
-
 
 
