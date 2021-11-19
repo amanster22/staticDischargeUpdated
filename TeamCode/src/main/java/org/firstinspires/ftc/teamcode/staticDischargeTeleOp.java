@@ -17,7 +17,6 @@ public class staticDischargeTeleOp extends OpMode {
     public DcMotor backRightMotor = null;
     public DcMotor carouselWheel = null;
     public DcMotor intakeStars = null;
-    public DcMotor intakeBase = null;
     public DcMotor armWheels = null;
     public DcMotor arm = null;
     public Servo rollerServo = null;
