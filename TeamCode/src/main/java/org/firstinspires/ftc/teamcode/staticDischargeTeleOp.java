@@ -100,10 +100,20 @@ public class staticDischargeTeleOp extends OpMode {
         }
         if (gamepad2.dpad_up){
             arm.setPower(0.3);
+
         }
+
         if(gamepad2.dpad_down){
             arm.setPower(-0.3);
         }
+//Paddle Servo
+        if(gamepad2.a){
+            paddleServo.setPosition(0.5);
+        }
+        if(gamepad2.b){
+            paddleServo.setPosition(0);
+        }
+
 
         carouselWheel.setPower(.9 * gamepad2.left_stick_y);
         telemetry.addData("speed", carouselWheel);
