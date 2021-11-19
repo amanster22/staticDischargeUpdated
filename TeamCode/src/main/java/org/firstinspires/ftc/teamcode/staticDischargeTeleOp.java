@@ -57,7 +57,7 @@ staticDischargeTeleOp extends OpMode {
     @Override
     public void init_loop() {
         latchServo.setPosition(-0.5);
-        paddleServo.setPosition(0);
+        paddleServo.setPosition(0.5);
     }
 
     /*
@@ -96,7 +96,8 @@ staticDischargeTeleOp extends OpMode {
         if (gamepad1.right_bumper) {
             speedUpdate = 0.2;
             telemetry.addData("Say", "Speed:slow");
-        } else {
+        }
+        else {
             telemetry.addData("Say", "Speed:normal");
         }
         if (gamepad2.dpad_up){
@@ -105,14 +106,14 @@ staticDischargeTeleOp extends OpMode {
         }
 
         if(gamepad2.dpad_down){
-            arm.setPower(-0.3);
+            arm.setPower(-0.5);
         }
 //Paddle Servo
         if(gamepad2.a){
             paddleServo.setPosition(0.5);
         }
         if(gamepad2.b){
-            paddleServo.setPosition(0);
+            paddleServo.setPosition(-0.5);
         }
 
 
@@ -125,7 +126,7 @@ staticDischargeTeleOp extends OpMode {
 
         if (gamepad1.a) {//intake on
             starSpeed=starSpeed*-1;
-            aWheelSpeed=aWheelSpeed*-1;
+            aWheelSpeed=aWheelSpeed;
             intakeStars.setPower(starSpeed);
             armWheels.setPower(aWheelSpeed);
             rollerServo.setDirection(Servo.Direction.FORWARD);
