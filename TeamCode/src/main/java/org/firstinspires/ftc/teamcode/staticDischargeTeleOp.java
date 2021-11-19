@@ -97,22 +97,23 @@ staticDischargeTeleOp extends OpMode {
             speedUpdate = 0.2;
             telemetry.addData("Say", "Speed:slow");
         }
-        else {
+        else if (gamepad1.left_bumper){
+            speedUpdate = 1;
             telemetry.addData("Say", "Speed:normal");
         }
-        if (gamepad2.dpad_up){
+        if (gamepad2.dpad_down){
             arm.setPower(0.3);
 
         }
 
-        if(gamepad2.dpad_down){
+        if(gamepad2.dpad_up){
             arm.setPower(-0.5);
         }
 //Paddle Servo
-        if(gamepad2.a){
+        if(gamepad2.left_trigger == 1){
             paddleServo.setPosition(0.5);
         }
-        if(gamepad2.b){
+        if(gamepad2.right_trigger == 1){
             paddleServo.setPosition(-0.5);
         }
 
@@ -125,30 +126,35 @@ staticDischargeTeleOp extends OpMode {
         lastDown = gamepad1.dpad_down;
 
         if (gamepad1.a) {//intake on
-            starSpeed=starSpeed*-1;
+//            starSpeed=starSpeed*-1;
             aWheelSpeed=aWheelSpeed;
-            intakeStars.setPower(starSpeed);
+            intakeStars.setPower(-0.5);
             armWheels.setPower(aWheelSpeed);
-            rollerServo.setDirection(Servo.Direction.FORWARD);
+            //rollerServo.setDirection(Servo.Direction.FORWARD);
             rollerServo.setPosition(0);
             telemetry.addData("Intake:", true);
 
 
         }
         if(gamepad1.b){//intake off
+            intakeStars.setPower(1);
+            armWheels.setPower(-1);
+            rollerServo.setPosition(1);
+            telemetry.addData("Intake:", false);
+        }
+        if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-            rollerServo.setDirection(null);
-            rollerServo.setPosition(0);
+            rollerServo.setPosition(0.5);
             telemetry.addData("Intake:", false);
         }
 
-        if(gamepad1.x){
-            latchServo.setPosition(0.5);
-        }
-        if(gamepad1.y){
-            latchServo.setPosition(-0.5);
-        }
+//        if(gamepad1.x){
+//            latchServo.setPosition(0.5);
+//        }
+//        if(gamepad1.y){
+//            latchServo.setPosition(-0.5);
+//        }
         //Holonomic Drivetrain code
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));

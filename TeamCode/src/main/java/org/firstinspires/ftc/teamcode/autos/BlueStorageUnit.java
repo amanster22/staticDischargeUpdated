@@ -15,6 +15,7 @@ public class BlueStorageUnit extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     public Servo latchServo = null;
+    public DcMotor arm = null;
 //    public Servo flipServo = null;
 //    public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
@@ -22,25 +23,45 @@ public class BlueStorageUnit extends LinearOpMode {
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         latchServo = hardwareMap.servo.get("latch");
+        arm = hardwareMap.dcMotor.get("arm");
         latchServo.setPosition(0.5);
 
         waitForStart();
-        bot.driveTrain.moveEncoders(9.5, 0, 0, 0.2);
+        bot.driveTrain.moveEncoders(9.75, 0, 0, 0.2);
         sleep(200);
         bot.driveTrain.moveEncoders(0, -28.5, 0, 0.8);
         sleep(200);
-        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-        sleep(200);
-        bot.driveTrain.moveEncoders(-1.5,0,0,1);
+
+        bot.driveTrain.moveEncoders(-1.1,0,0,1);
         sleep(200);
         carouselWheel.setPower(-0.55);
-        sleep(2500);
+        sleep(3000);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(18, 0, 0, 1);
-        sleep(100);
-//        flipServo.setPosition(0.5);
+        bot.driveTrain.moveEncoders(27.5, 0, 0, 1);
+        sleep(200);
+//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
+//        sleep(200);
+        bot.driveTrain.moveEncoders(0, 23, 0, 1);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0, 0, 0.67, 1);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0, -0.9, 0, 1);
+        sleep(200);
+        arm.setPower(-0.5);
+        sleep(1600);
+        arm.setPower(0.3);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0, 0, -0.02, 0.5);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0, 24.75, 0, 0.7);
+        sleep(200);
+        bot.driveTrain.moveEncoders(9.5, 0, 0, 0.7);
+        sleep(200);
 
-        bot.driveTrain.moveEncoders(0,-1,0,0.5);
+
+
+//        flipServo.setPosition(0.5);
+//        bot.driveTrain.moveEncoders(0,-1,0,0.5);
 
 
     }
