@@ -56,8 +56,7 @@ staticDischargeTeleOp extends OpMode {
      */
     @Override
     public void init_loop() {
-        latchServo.setPosition(-0.5);
-        paddleServo.setPosition(0.5);
+
     }
 
     /*
@@ -65,7 +64,8 @@ staticDischargeTeleOp extends OpMode {
      */
     @Override
     public void start() {
-
+        latchServo.setPosition(-0.5);
+        paddleServo.setPosition(0.5);
     }
 
     /*
