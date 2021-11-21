@@ -29,7 +29,7 @@ public class RedStorageUnit extends LinearOpMode {
         sleep(200);
         bot.driveTrain.moveEncoders(-18, 0, 0, 0.5);
         sleep(200);
-        bot.driveTrain.moveEncoders(0, -7.5, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -8, 0, 0.4);
         sleep(200);
         carouselWheel.setPower(0.5);
         sleep(3500);
@@ -39,13 +39,23 @@ public class RedStorageUnit extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 24, 0, 0.8);
         sleep(200);
         bot.driveTrain.moveEncoders(4.5, 0, 0, 0.5);
+        sleep(200);
         bot.driveTrain.moveEncoders(0,0,-0.4,1);
-        bot.driveTrain.moveEncoders(0,-15,0,1);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0,-16.8,0,1);
+        sleep(200);
         arm.setPower(-0.5);
         sleep(1600);
         arm.setPower(0.3);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0,15.5,0,1);
+        sleep(700);
+        bot.driveTrain.moveEncoders(0,0,0.01,1);
+        sleep(200);
+        bot.driveTrain.moveEncoders(6, 0, 0, 0.5);
+        sleep(200);
+        bot.driveTrain.moveEncoders(0,24,0,1);
+        sleep(200);
+        bot.driveTrain.moveEncoders(-14.8,0, 0, 0.5);
+        sleep(200);
 
         //sleep(100);
         //bot.driveTrain.moveEncoders(0,-5,0,0.5);
