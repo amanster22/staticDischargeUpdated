@@ -14,7 +14,7 @@ public class RedStorageUnit extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     public Servo rightLatchServo = null;
-    public Servo leftLatchServo = null;
+//    public Servo leftLatchServo = null;
     public DcMotor arm =null;
     public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
@@ -22,11 +22,11 @@ public class RedStorageUnit extends LinearOpMode {
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
-        leftLatchServo = hardwareMap.servo.get("leftlatch");
+//        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm=hardwareMap.dcMotor.get("arm");
 
         rightLatchServo.setPosition(0.5);
-        leftLatchServo.setPosition(0.5);
+//        leftLatchServo.setPosition(0.5);
 
         waitForStart();
         bot.driveTrain.moveEncoders(0, 12, 0, 0.8);
