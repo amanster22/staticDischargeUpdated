@@ -13,14 +13,19 @@ public class RedWarehouse extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
-    public Servo latchServo = null;
+    public Servo leftLatchServo = null;
+    public Servo rightLatchServo = null;
     public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
 
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
-        latchServo = hardwareMap.servo.get("latch");
-        latchServo.setPosition(0.5);
+        rightLatchServo = hardwareMap.servo.get("rightlatch");
+        leftLatchServo = hardwareMap.servo.get("leftlatch");
+
+        rightLatchServo.setPosition(0.5);
+        leftLatchServo.setPosition(0.5);
+
 
         waitForStart();
         bot.driveTrain.moveEncoders(-11, 0, 0, 1);

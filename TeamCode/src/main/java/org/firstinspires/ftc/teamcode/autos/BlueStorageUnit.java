@@ -14,7 +14,8 @@ public class BlueStorageUnit extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
-    public Servo latchServo = null;
+    public Servo leftLatchServo=null;
+    public Servo rightLatchServo=null;
     public DcMotor arm = null;
 //    public Servo flipServo = null;
 //    public ElapsedTime runtime = new ElapsedTime();
@@ -22,41 +23,44 @@ public class BlueStorageUnit extends LinearOpMode {
 
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
-        latchServo = hardwareMap.servo.get("latch");
+        rightLatchServo = hardwareMap.servo.get("rightlatch");
+        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm = hardwareMap.dcMotor.get("arm");
-        latchServo.setPosition(0.5);
+        rightLatchServo.setPosition(0.5);
+        leftLatchServo.setPosition(0.5);
 
         waitForStart();
-        bot.driveTrain.moveEncoders(9.75, 0, 0, 0.2);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, -28.5, 0, 0.8);
-        sleep(200);
+        bot.driveTrain.moveEncoders(12, 0, 0, 0.3);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.8);
+        sleep(500);
 
-        bot.driveTrain.moveEncoders(-1.25,0,0,1);
-        sleep(200);
+        bot.driveTrain.moveEncoders(-3,0,0,1);
+        sleep(500);
         carouselWheel.setPower(-0.55);
         sleep(3000);
         carouselWheel.setPower(0);
         bot.driveTrain.moveEncoders(32, 0, 0, 1);
-        sleep(200);
+        sleep(500);
 //        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
 //        sleep(200);
-        bot.driveTrain.moveEncoders(0, 23, 0, 1);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, 0, 0.67, 1);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, -2, 0, 1);
-        sleep(200);
+        bot.driveTrain.moveEncoders(0, 24, 0, 1);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, 0, 0.65, 1);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -1, 0, 1);
+        sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
         arm.setPower(0.3);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, 24.9, 0, 0.7);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, 0, 0.01, 0.5);
-        sleep(200);
-        bot.driveTrain.moveEncoders(10.25, 0, 0, 0.7);
-        sleep(200);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.5);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, 25, 0, 0.7);
+        sleep(500);
+
+        bot.driveTrain.moveEncoders(10, 0, 0, 0.7);
+        sleep(500);
 
 
 

@@ -15,14 +15,19 @@ public class BlueWarehouse extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     public Servo blockDropper = null;
-    public Servo latchServo = null;
+    public Servo rightLatchServo = null;
+    public Servo leftLatchServo = null;
+
     public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
 
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
-        latchServo = hardwareMap.servo.get("latch");
-        latchServo.setPosition(0.5);
+        rightLatchServo = hardwareMap.servo.get("rightlatch");
+        leftLatchServo = hardwareMap.servo.get("leftlatch");
+
+        rightLatchServo.setPosition(0.5);
+        leftLatchServo.setPosition(0.5);
 //hello
         waitForStart();
         bot.driveTrain.moveEncoders(0,20,0,0.7);

@@ -21,7 +21,8 @@ staticDischargeTeleOp extends OpMode {
     public DcMotor armWheels = null;
     public DcMotor arm = null;
     public Servo rollerServo = null;
-    public Servo latchServo=null;
+    public Servo leftLatchServo=null;
+    public Servo rightLatchServo=null;
     public Servo paddleServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
@@ -45,7 +46,8 @@ staticDischargeTeleOp extends OpMode {
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
         rollerServo = hardwareMap.servo.get("roller");
-        latchServo = hardwareMap.servo.get("latch");
+        rightLatchServo = hardwareMap.servo.get("rightlatch");
+        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
 
@@ -64,7 +66,8 @@ staticDischargeTeleOp extends OpMode {
      */
     @Override
     public void start() {
-        latchServo.setPosition(-0.5);
+        rightLatchServo.setPosition(-0.5);
+        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
     }
 
@@ -110,11 +113,11 @@ staticDischargeTeleOp extends OpMode {
             arm.setPower(-0.5);
         }
 //Paddle Servo
-        if(gamepad2.left_trigger == 1){
-            paddleServo.setPosition(0.5);
-        }
         if(gamepad2.right_trigger == 1){
             paddleServo.setPosition(-0.5);
+        }
+        else if (gamepad2.right_trigger == 0) {
+            paddleServo.setPosition(0.5);
         }
 
 
