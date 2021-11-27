@@ -58,7 +58,9 @@ staticDischargeTeleOp extends OpMode {
      */
     @Override
     public void init_loop() {
-
+        rightLatchServo.setPosition(1);
+//        leftLatchServo.setPosition(-0.5);
+        paddleServo.setPosition(0.5);
     }
 
     /*
@@ -139,7 +141,7 @@ staticDischargeTeleOp extends OpMode {
 
 
         }
-        if(gamepad1.b){//intake off
+        if(gamepad1.b){//intake reverse
             intakeStars.setPower(1);
             armWheels.setPower(-1);
             rollerServo.setPosition(1);
@@ -148,7 +150,7 @@ staticDischargeTeleOp extends OpMode {
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-            rollerServo.setPosition(0.5);
+            rollerServo.setPosition(-0.5);
             telemetry.addData("Intake:", false);
         }
 
