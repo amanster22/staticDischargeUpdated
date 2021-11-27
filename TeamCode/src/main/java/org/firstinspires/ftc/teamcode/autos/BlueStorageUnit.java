@@ -35,7 +35,7 @@ public class BlueStorageUnit extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.5);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(-4.95,0,0,0.6);
+        bot.driveTrain.moveEncoders(-3.5,0,0,0.6);
         sleep(500);
         carouselWheel.setPower(-0.5);
         sleep(3000);

@@ -123,7 +123,7 @@ staticDischargeTeleOp extends OpMode {
         }
 
 
-        carouselWheel.setPower(.9 * gamepad2.left_stick_y);
+        carouselWheel.setPower(.6 * gamepad2.left_stick_y);
         telemetry.addData("speed", carouselWheel);
         telemetry.update();
 
