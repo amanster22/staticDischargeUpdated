@@ -30,7 +30,7 @@ public class RedWarehouse extends LinearOpMode {
         waitForStart();
         bot.driveTrain.moveEncoders(-11, 0, 0, 1);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 35, 0, 1);
+        bot.driveTrain.moveEncoders(0, 29, 0, 1);
 
     }
 }

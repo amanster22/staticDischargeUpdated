@@ -29,37 +29,48 @@ public class RedStorageUnit extends LinearOpMode {
 //        leftLatchServo.setPosition(0.5);
 
         waitForStart();
-        bot.driveTrain.moveEncoders(0, 12, 0, 0.8);
-        sleep(200);
-        bot.driveTrain.moveEncoders(-18, 0, 0, 0.5);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0, -8, 0, 0.4);
-        sleep(200);
-        carouselWheel.setPower(0.5);
-        sleep(3500);
-        carouselWheel.setPower(0);
-
+        bot.driveTrain.moveEncoders(0, 12, 0, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 24, 0, 0.8);
-        sleep(200);
-        bot.driveTrain.moveEncoders(4.5, 0, 0, 0.5);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0,0,-0.4,1);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0,-16.8,0,1);
-        sleep(200);
+        bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -6.6, 0, 0.4);
+        sleep(500);
+        carouselWheel.setPower(0.475);
+        sleep(3200);
+        carouselWheel.setPower(0);
+        sleep(500);
+
+//        bot.driveTrain.moveEncoders(0, 24, 0, 0.6);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(4.5, 0, 0, 0.5);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(0,0,-0.39,0.6);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(0,-16.5,0,0.6);
+
+        bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, 0, -0.32, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -24, 0, 0.4);
+        sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
         arm.setPower(0.3);
         sleep(700);
-        bot.driveTrain.moveEncoders(0,0,0.01,1);
-        sleep(200);
-        bot.driveTrain.moveEncoders(6, 0, 0, 0.5);
-        sleep(200);
-        bot.driveTrain.moveEncoders(0,24,0,1);
-        sleep(200);
-        bot.driveTrain.moveEncoders(-14.8,0, 0, 0.5);
-        sleep(200);
+        bot.driveTrain.moveEncoders(0, 27, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
+        sleep(500);
+
+//        bot.driveTrain.moveEncoders(0,0,0.04,0.6);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(6, 0, 0, 0.5);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(0,24.45,0,0.6);
+//        sleep(500);
+//        bot.driveTrain.moveEncoders(-14.8,0, 0, 0.5);
+//        sleep(500);
 
         //sleep(100);
         //bot.driveTrain.moveEncoders(0,-5,0,0.5);
