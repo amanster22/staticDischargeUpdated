@@ -52,7 +52,7 @@ staticDischargeTeleOp extends OpMode {
         paddleServo = hardwareMap.servo.get("paddle");
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Aman and Daniel. I'm ready!");    //
+        telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
