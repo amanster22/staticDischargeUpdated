@@ -16,12 +16,14 @@ public class RedStorageUnit extends LinearOpMode {
     public Servo rightLatchServo = null;
 //    public Servo leftLatchServo = null;
     public DcMotor arm =null;
+    public Servo flickerServo=null;
     public ElapsedTime runtime = new ElapsedTime();
     public void runOpMode() {
 
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
+        flickerServo = hardwareMap.servo.get("flicker");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm=hardwareMap.dcMotor.get("arm");
 
@@ -33,7 +35,7 @@ public class RedStorageUnit extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -6.6, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
         sleep(500);
         carouselWheel.setPower(0.475);
         sleep(3200);
@@ -50,15 +52,19 @@ public class RedStorageUnit extends LinearOpMode {
 
         bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, -0.32, 0.4);
+        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -24, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -26, 0, 0.4);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
+        flickerServo.setPosition(-0.5);
+        sleep(1000);
+        flickerServo.setPosition(0.5);
+        sleep(500);
         arm.setPower(0.3);
         sleep(700);
-        bot.driveTrain.moveEncoders(0, 27, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
         sleep(500);
         bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
