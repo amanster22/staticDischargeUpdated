@@ -29,18 +29,23 @@
 
 package org.firstinspires.ftc.teamcode.autos;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 
-@TeleOp(name = "Sarah Duck Detection", group = "Concept")
+@Autonomous(name = "Sarah Duck Detection", group = "Concept")
 public class StaticDischargeDuckDetection extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
@@ -53,6 +58,11 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
      *  FreightFrenzy_BC.tflite  0: Ball,  1: Cube
      *  FreightFrenzy_DM.tflite  0: Duck,  1: Marker
      */
+    public StaticDischargeBot1 bot;
+    public DcMotor carouselWheel = null;
+    //    public Servo leftLatchServo=null;
+    public Servo rightLatchServo=null;
+    public DcMotor arm = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
             "Ball",
@@ -99,6 +109,12 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
+        bot = new StaticDischargeBot1(telemetry, hardwareMap);
+        carouselWheel = hardwareMap.dcMotor.get("wheel");
+        rightLatchServo = hardwareMap.servo.get("rightlatch");
+//        leftLatchServo = hardwareMap.servo.get("leftlatch");
+        arm = hardwareMap.dcMotor.get("arm");
+        rightLatchServo.setPosition(0.5);
         if (tfod != null) {
             tfod.activate();
 
@@ -116,28 +132,50 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
+        boolean duckDetected1 = false;
+        boolean duckDetected2 = false;
+        boolean duckDetected3 = false;
+        int count = 0;
+
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 if (tfod != null) {
+
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
+
                         // step through the list of recognitions and display boundary info.
                         int i = 0;
                         for (Recognition recognition : updatedRecognitions) {
                             telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                            telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                    recognition.getLeft(), recognition.getTop());
-                            telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                    recognition.getRight(), recognition.getBottom());
+
+                            if (count == 1) {
+                                duckDetected1 = true;
+                                telemetry.addData(String.format("1(%i)"), duckDetected2);
+                                break;
+                            }
+                            if (count == 2) {
+                                duckDetected2 = true;
+                                telemetry.addData(String.format("2(%i)"), duckDetected2);
+                                break;
+                            }
+                            if (count == 3) {
+                                duckDetected3 = true;
+                                telemetry.addData(String.format("3(%i)"), duckDetected3);
+                                break;
+                            }
+                            count++;
+
                             i++;
                         }
                         telemetry.update();
                     }
                 }
             }
+
         }
     }
 
