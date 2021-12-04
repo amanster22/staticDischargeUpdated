@@ -24,6 +24,7 @@ staticDischargeTeleOp extends OpMode {
 //    public Servo leftLatchServo=null;
     public Servo rightLatchServo=null;
     public Servo paddleServo=null;
+    public Servo flickerServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
     double aWheelSpeed = 0.8;
@@ -50,9 +51,9 @@ staticDischargeTeleOp extends OpMode {
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
-
+        flickerServo = hardwareMap.servo.get("flicker");
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Aman and Daniel. I'm ready!");    //
+        telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
@@ -71,6 +72,7 @@ staticDischargeTeleOp extends OpMode {
         rightLatchServo.setPosition(-0.5);
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
+        flickerServo.setPosition(0.5);
     }
 
     /*
@@ -121,10 +123,16 @@ staticDischargeTeleOp extends OpMode {
         else if (gamepad2.right_trigger == 0) {
             paddleServo.setPosition(0.5);
         }
-
+//Flicker Servo
+        if(gamepad2.left_trigger == 1){
+            flickerServo.setPosition(-0.5);
+        }
+        else if (gamepad2.left_trigger == 0) {
+            flickerServo.setPosition(0.5);
+        }
 
         carouselWheel.setPower(.6 * gamepad2.left_stick_y);
-        telemetry.addData("speed", carouselWheel);
+        telemetry.addData("speed", carouselWheel.getPower());
         telemetry.update();
 
         lastUp = gamepad1.dpad_up;
