@@ -160,15 +160,9 @@ public class BlueStorageUnit extends LinearOpMode {
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
 
-//        leftLatchServo.setPosition(0.5);
-
         waitForStart();
+
+        //Detect and add if statements for which path to take (path1, path2, path3)
         path3();
-
-
-//        flipServo.setPosition(0.5);
-//        bot.driveTrain.moveEncoders(0,-1,0,0.5);
-
-
     }
 }
