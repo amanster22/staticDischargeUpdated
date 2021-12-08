@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.List;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -61,9 +62,9 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     //    public Servo leftLatchServo=null;
-    public Servo rightLatchServo=null;
+    public Servo rightLatchServo = null;
     public DcMotor arm = null;
-    public Servo flickerServo=null;
+    public Servo flickerServo = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
             "Ball",
@@ -125,7 +126,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0/9.0);
+            tfod.setZoom(2.5, 16.0 / 9.0);
         }
 
         /** Wait for the game to begin */
@@ -164,7 +165,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                                 bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
                                 sleep(500);
 
-                                bot.driveTrain.moveEncoders(-2.76,0,0,0.3);
+                                bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
                                 sleep(500);
                                 carouselWheel.setPower(-0.5);
                                 sleep(3000);
@@ -202,7 +203,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                                 bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
                                 sleep(500);
 
-                                bot.driveTrain.moveEncoders(-2.76,0,0,0.3);
+                                bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
                                 sleep(500);
                                 carouselWheel.setPower(-0.5);
                                 sleep(3000);

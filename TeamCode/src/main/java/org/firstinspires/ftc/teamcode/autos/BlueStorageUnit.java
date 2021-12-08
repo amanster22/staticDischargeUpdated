@@ -22,7 +22,7 @@ public class BlueStorageUnit extends LinearOpMode {
 //    public Servo flipServo = null;
 //    public ElapsedTime runtime = new ElapsedTime();
 
-    public void path1() {
+    public void path1() {   //high
         bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
@@ -62,7 +62,7 @@ public class BlueStorageUnit extends LinearOpMode {
         sleep(500);
     }
 
-    public void path2() {
+    public void path2() {   //middle
         bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
@@ -102,7 +102,7 @@ public class BlueStorageUnit extends LinearOpMode {
         sleep(500);
     }
 
-    public void path3(){
+    public void path3(){    //low
         bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
@@ -131,7 +131,7 @@ public class BlueStorageUnit extends LinearOpMode {
         sleep(600);
         arm.setPower(0.0);
         sleep(1000);
-
+        bot.driveTrain.moveEncoders(0,-6.5,0,0.3);
         paddleServo.setPosition(-0.5);
         sleep(1000);
 
@@ -140,7 +140,7 @@ public class BlueStorageUnit extends LinearOpMode {
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 22, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 27, 0, 0.3);
         sleep(500);
 
         bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
