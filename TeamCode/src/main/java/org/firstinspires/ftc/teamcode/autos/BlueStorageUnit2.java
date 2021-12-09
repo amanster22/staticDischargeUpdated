@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
     public Servo paddleServo = null;
     public Servo cameraServo = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
+    private ElapsedTime     runtime = new ElapsedTime();
     private static final String[] LABELS = {
             "Ball",
             "Cube",
@@ -216,48 +218,48 @@ public class BlueStorageUnit2 extends LinearOpMode {
         int count = 0;
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                while (opModeIsActive()) {
-                    if (tfod != null) {
-                        // getUpdatedRecognitions() will return null if no new information is available since
-                        // the last time that call was made.
-                        List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-                        if (updatedRecognitions != null) {
-                            telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-                            // step through the list of recognitions and display boundary info.
-                            int i = 0;
-                            boolean isDuckDetected = false;     //  ** ADDED **
-                            for (Recognition recognition : updatedRecognitions) {
-                                telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                                telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                        recognition.getLeft(), recognition.getTop());
-                                telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                        recognition.getRight(), recognition.getBottom());
-                                i++;
+                    // getUpdatedRecognitions() will return null if no new information is available since
+                    // the last time that call was made.
+                    List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                    if (updatedRecognitions != null) {
+                        telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-                                // check label to see if the camera now sees a Duck         ** ADDED **
-                                if (recognition.getLabel().equals("Duck")) {            //  ** ADDED **
-                                    isDuckDetected = true;                             //  ** ADDED **
-                                    telemetry.addData("Object Detected", "Duck");      //  ** ADDED **
-                                    if (count == 0) {
-                                        path1();
-                                    }
-                                    else if (count == 1) {
-                                        path2();
-                                    }
-                                    else if (count == 2) {
-                                        path3();
-                                    }
+                        // step through the list of recognitions and display boundary info.
+                        int i = 0;
+                        boolean isDuckDetected = false;     //  ** ADDED **
+                        for (Recognition recognition : updatedRecognitions) {
+                            telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                            telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                    recognition.getLeft(), recognition.getTop());
+                            telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                    recognition.getRight(), recognition.getBottom());
+                            i++;
 
-                                else {                                               //  ** ADDED **
-                                isDuckDetected = false;                            //  ** ADDED **
-                                cameraServo.setPosition(0.2);
-                                count++;
-                                }                                                      //  ** ADDED **
+                            // check label to see if the camera now sees a Duck         ** ADDED **
+                            if (recognition.getLabel().equals("Cube")) {            //  ** ADDED **
+                                isDuckDetected = true;                             //  ** ADDED **
+                                telemetry.addData("Object Detected", "Cube");      //  ** ADDED **
+                                if (count == 0) {
+                                    path1();
+                                } else if (count == 1) {
+                                    path2();
+                                } else if (count == 2) {
+                                    path3();
+                                }
                             }
-                            telemetry.update();
+
+                            else {
+                               cameraServo.setPosition(0.2);
+                               count++;
+                            }
+                                                                                //  ** ADDED **
                         }
-                    }
+                        telemetry.addData("No object", "0");
+                        cameraServo.setPosition(0.08);
+                        telemetry.update();
+                        }
+
                 }
 
 
@@ -272,10 +274,10 @@ public class BlueStorageUnit2 extends LinearOpMode {
 //
                         // telemetry.update();
                     }
-                }
+
         
 
-            }
+
 
 
 
