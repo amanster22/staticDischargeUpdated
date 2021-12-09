@@ -37,7 +37,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.List;
-
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -46,7 +45,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 
-@Autonomous(name = "Sarah Duck Detection", group = "Concept")
+@Autonomous(name = "Duck Detection", group = "Concept")
 public class StaticDischargeDuckDetection extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
@@ -62,9 +61,9 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     //    public Servo leftLatchServo=null;
-    public Servo rightLatchServo = null;
+    public Servo rightLatchServo=null;
     public DcMotor arm = null;
-    public Servo flickerServo = null;
+    public Servo flickerServo=null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
             "Ball",
@@ -117,6 +116,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm = hardwareMap.dcMotor.get("arm");
         rightLatchServo.setPosition(0.5);
+        flickerServo = hardwareMap.servo.get("flicker");
         if (tfod != null) {
             tfod.activate();
 
@@ -126,7 +126,7 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0 / 9.0);
+            tfod.setZoom(2.5, 16.0/9.0);
         }
 
         /** Wait for the game to begin */
@@ -153,95 +153,26 @@ public class StaticDischargeDuckDetection extends LinearOpMode {
                         int i = 0;
                         for (Recognition recognition : updatedRecognitions) {
                             telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-
                             if (count == 3) {
                                 duckDetected1 = true;
-                                break;
+
                             }
                             if (count == 2) {
                                 duckDetected2 = true;
-                                bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
-                                sleep(500);
+                                telemetry.addData(String.format("DuckDetection2"), 2);
 
-                                bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
-                                sleep(500);
-                                carouselWheel.setPower(-0.5);
-                                sleep(3000);
-                                carouselWheel.setPower(0);
-                                bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
-                                sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
-                                bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, -6.75, 0, 0.2);
-                                sleep(500);
-                                arm.setPower(-0.5);
-                                sleep(1000);
-                                arm.setPower(0.0);
-
-                                sleep(500);
-                                arm.setPower(0.3);
-                                sleep(500);
-                                //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, 30, 0, 0.6);
-                                sleep(500);
-
-                                bot.driveTrain.moveEncoders(13.25, 0, 0, 0.6);
-                                sleep(500);
-                                break;
                             }
                             if (count == 1) {
                                 duckDetected3 = true;
-                                bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
-                                sleep(500);
-
-                                bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
-                                sleep(500);
-                                carouselWheel.setPower(-0.5);
-                                sleep(3000);
-                                carouselWheel.setPower(0);
-                                bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
-                                sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
-                                bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, -6.75, 0, 0.2);
-                                sleep(500);
-                                arm.setPower(-0.5);
-                                sleep(1000);
-                                arm.setPower(0.0);
-                                sleep(1000);
-                                flickerServo.setPosition(-0.5);
-                                sleep(1000);
-                                flickerServo.setPosition(0.5);
-                                sleep(500);
-                                arm.setPower(0.3);
-                                sleep(500);
-                                //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
-                                sleep(500);
-                                bot.driveTrain.moveEncoders(0, 30, 0, 0.6);
-                                sleep(500);
-
-                                bot.driveTrain.moveEncoders(13.25, 0, 0, 0.6);
-                                sleep(500);
-                                break;
+                                telemetry.addData(String.format("DuckDetection3"), 3);
                             }
                             count++;
 
                             i++;
+                            // Servo adjust position for webcam
                         }
-                        telemetry.update();
+
+                        // telemetry.update();
                     }
                 }
             }
