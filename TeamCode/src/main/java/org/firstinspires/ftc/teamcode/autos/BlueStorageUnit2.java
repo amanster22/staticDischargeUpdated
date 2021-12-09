@@ -3,9 +3,7 @@ package org.firstinspires.ftc.teamcode.autos;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -16,8 +14,8 @@ import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 import java.util.List;
 
-@Autonomous(name = "Blue StorageUnit")
-public class BlueStorageUnit extends LinearOpMode {
+@Autonomous(name = "Blue StorageUnit2")
+public class BlueStorageUnit2 extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
@@ -215,11 +213,58 @@ public class BlueStorageUnit extends LinearOpMode {
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
         
-
+        int count = 0;
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                path1();
+                while (opModeIsActive()) {
+                    if (tfod != null) {
+                        // getUpdatedRecognitions() will return null if no new information is available since
+                        // the last time that call was made.
+                        List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                        if (updatedRecognitions != null) {
+                            telemetry.addData("# Object Detected", updatedRecognitions.size());
 
+                            // step through the list of recognitions and display boundary info.
+                            int i = 0;
+                            boolean isDuckDetected = false;     //  ** ADDED **
+                            for (Recognition recognition : updatedRecognitions) {
+                                telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                                telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                        recognition.getLeft(), recognition.getTop());
+                                telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                        recognition.getRight(), recognition.getBottom());
+                                i++;
+
+                                // check label to see if the camera now sees a Duck         ** ADDED **
+                                if (recognition.getLabel().equals("Duck")) {            //  ** ADDED **
+                                    isDuckDetected = true;                             //  ** ADDED **
+                                    telemetry.addData("Object Detected", "Duck");      //  ** ADDED **
+                                    if (count == 0) {
+                                        path1();
+                                    }
+                                    else if (count == 1) {
+                                        path2();
+                                    }
+                                    else if (count == 2) {
+                                        path3();
+                                    }
+
+                                else {                                               //  ** ADDED **
+                                isDuckDetected = false;                            //  ** ADDED **
+                                cameraServo.setPosition(0.2);
+                                count++;
+                                }                                                      //  ** ADDED **
+                            }
+                            telemetry.update();
+                        }
+                    }
+                }
+
+
+
+    
+
+                     
             }
 
 ////                    path3();
@@ -228,9 +273,9 @@ public class BlueStorageUnit extends LinearOpMode {
                         // telemetry.update();
                     }
                 }
+        
 
-
-
+            }
 
 
 
