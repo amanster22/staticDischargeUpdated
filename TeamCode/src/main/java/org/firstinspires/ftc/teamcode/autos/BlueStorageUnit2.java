@@ -191,7 +191,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
         rightLatchServo.setPosition(0.5);
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
-        cameraServo.setPosition(0);
+        cameraServo.setPosition(-0.3);
         if (tfod != null) {
             tfod.activate();
 
@@ -201,7 +201,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0/9.0);
+            tfod.setZoom(2.5, 20.0/20.0);
         }
         boolean duckDetected1 = false;
         boolean duckDetected2 = false;
@@ -216,9 +216,9 @@ public class BlueStorageUnit2 extends LinearOpMode {
          **/
         
         int count = 0;
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
 
+            while (opModeIsActive()) {
+                if (tfod != null){
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
@@ -230,38 +230,46 @@ public class BlueStorageUnit2 extends LinearOpMode {
                         boolean isDuckDetected = false;     //  ** ADDED **
                         for (Recognition recognition : updatedRecognitions) {
                             telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                            telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                    recognition.getLeft(), recognition.getTop());
-                            telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                    recognition.getRight(), recognition.getBottom());
                             i++;
 
                             // check label to see if the camera now sees a Duck         ** ADDED **
                             if (recognition.getLabel().equals("Cube")) {            //  ** ADDED **
-                                isDuckDetected = true;                             //  ** ADDED **
-                                telemetry.addData("Object Detected", "Cube");      //  ** ADDED **
-                                if (count == 0) {
-                                    path1();
-                                } else if (count == 1) {
-                                    path2();
-                                } else if (count == 2) {
-                                    path3();
-                                }
-                            }
 
-                            else {
-                               cameraServo.setPosition(0.2);
-                               count++;
+                                isDuckDetected = true;                             //  ** ADDED **
+                                telemetry.addData("Object Detected", "Cube");}      //  ** ADDED **
+
+
+
+                            i++;}
+                        if (isDuckDetected == true) {
+                            if (count == 0) {
+                                path1();
+                                break;
                             }
-                                                                                //  ** ADDED **
+                            else if (count == 1) {
+                                path2();
+                                break;
+                            }
+                            else if (count == 2) {
+                                path3();
+                                break;
+                            }
+                        }
+                        else {
+                            cameraServo.setPosition(cameraServo.getPosition() + 0.1);
+                        }
+                        count++;
+
+
+                            //  ** ADDED **
                         }
                         telemetry.addData("No object", "0");
                         cameraServo.setPosition(0.08);
                         telemetry.update();
-                        }
+                    }
+
 
                 }
-
 
 
     
@@ -273,7 +281,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
 ////                    break;
 //
                         // telemetry.update();
-                    }
+
 
         
 
