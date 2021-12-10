@@ -69,7 +69,7 @@ staticDischargeTeleOp extends OpMode {
      */
     @Override
     public void start() {
-        rightLatchServo.setPosition(-0.5);
+        rightLatchServo.setPosition(-0.8);
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
         flickerServo.setPosition(0.5);

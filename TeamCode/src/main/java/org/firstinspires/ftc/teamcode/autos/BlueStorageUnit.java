@@ -203,9 +203,6 @@ public class BlueStorageUnit extends LinearOpMode {
             // (typically 16/9).
             tfod.setZoom(2.5, 16.0/9.0);
         }
-        boolean duckDetected1 = false;
-        boolean duckDetected2 = false;
-        boolean duckDetected3 = false;
 
         waitForStart();
 
@@ -214,13 +211,53 @@ public class BlueStorageUnit extends LinearOpMode {
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
-        
+
+
+        boolean duckDetected1 = false;
+        boolean duckDetected2 = false;
+        boolean duckDetected3 = false;
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                path1();
+                if (tfod != null) {
 
-            }
+                    // getUpdatedRecognitions() will return null if no new information is available since
+                    // the last time that call was made.
+                    List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                    int i = 0;
+                    for (Recognition recognition : updatedRecognitions) {
+                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+
+                        i++;
+
+                        // check label to see if the camera now sees a Duck         ** ADDED **
+                        if (recognition.getLabel().equals("Duck")) {            //  ** ADDED **
+                            duckDetected1 = true;                             //  ** ADDED **
+                            telemetry.addData("Object Detected", "Duck");      //  ** ADDED **
+                        } else {                                               //  ** ADDED **
+                            duckDetected1 = false;                            //  ** ADDED **
+                        }                                                      //  ** ADDED **
+                    }
+                    telemetry.update();
+
+
+                    cameraServo.setPosition(0.5);
+                    if (duckDetected1 == true) {
+                        break;}
+
+                    for (int j = 0; i < 10; j++) {
+                        if (updatedRecognitions != null) {
+                            telemetry.addData("DuckDetection2", "path2");
+                            duckDetected2 = true;
+                            path2();
+                            break;
+                        }
+                    }
+                    if (duckDetected2 == true) {
+                        break;}
+//
+////                    cameraServo.setPosition(0.3);
+                    }
 
 ////                    path3();
 ////                    break;
@@ -229,8 +266,7 @@ public class BlueStorageUnit extends LinearOpMode {
                     }
                 }
 
-
-
+            }
 
 
 
