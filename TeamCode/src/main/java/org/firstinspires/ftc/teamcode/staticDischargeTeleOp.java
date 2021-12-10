@@ -21,6 +21,7 @@ staticDischargeTeleOp extends OpMode {
     public DcMotor armWheels = null;
     public DcMotor arm = null;
     public Servo rollerServo = null;
+    public Servo cameraServo=null;
 //    public Servo leftLatchServo=null;
     public Servo rightLatchServo=null;
     public Servo paddleServo=null;
@@ -52,6 +53,7 @@ staticDischargeTeleOp extends OpMode {
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
+        cameraServo=hardwareMap.servo.get("camera");
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
     }
@@ -62,6 +64,7 @@ staticDischargeTeleOp extends OpMode {
         rightLatchServo.setPosition(1);
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
+        cameraServo.setPosition(-1);
     }
 
     /*

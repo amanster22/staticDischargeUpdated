@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.autos;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -16,8 +15,8 @@ import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 import java.util.List;
 
-@Autonomous(name = "Blue StorageUnit")
-public class BlueStorageUnit extends LinearOpMode {
+@Autonomous(name = "Red StorageUnit2")
+public class RedStorageUnit2 extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
@@ -28,6 +27,7 @@ public class BlueStorageUnit extends LinearOpMode {
     public Servo paddleServo = null;
     public Servo cameraServo = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
+    private ElapsedTime runtime = new ElapsedTime();
     private static final String[] LABELS = {
             "Ball",
             "Cube",
@@ -53,106 +53,93 @@ public class BlueStorageUnit extends LinearOpMode {
 //    public ElapsedTime runtime = new ElapsedTime();
 
     public void path3() {
-        bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
+        telemetry.addData("Say","Running Path3=high");
+        bot.driveTrain.moveEncoders(0, 12, 0, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
+        bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
+        sleep(500);
+        carouselWheel.setPower(0.475);
+        sleep(3200);
+        carouselWheel.setPower(0);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(3000);
-        carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
+        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
-        bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, -6, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -26, 0, 0.4);
         sleep(500);
         arm.setPower(-0.5);
-        sleep(1000);
-        arm.setPower(0.0);
-        sleep(1000);
+        sleep(1600);
         flickerServo.setPosition(-0.5);
         sleep(1000);
         flickerServo.setPosition(0.5);
         sleep(500);
         arm.setPower(0.3);
+        sleep(700);
+        bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
         sleep(500);
-        //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, 30, 0, 0.3);
+        bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
-        sleep(500);
+
     }
 
     public void path2() {
-        bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
+        telemetry.addData("Say","Running Path2=middle");
+        bot.driveTrain.moveEncoders(0, 12, 0, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
+        bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
+        sleep(500);
+        carouselWheel.setPower(0.475);
+        sleep(3200);
+        carouselWheel.setPower(0);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(3000);
-        carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
+        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
-        bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
+        bot.driveTrain.moveEncoders(0, -23, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
-        sleep(500);
-//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
-//        sleep(500);
         arm.setPower(-0.5);
-        sleep(1000);
-        arm.setPower(0.0);
-        sleep(1000);
+        sleep(1600);
         flickerServo.setPosition(-0.5);
         sleep(1000);
         flickerServo.setPosition(0.5);
         sleep(500);
         arm.setPower(0.3);
-        sleep(500);
-        //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, 28, 0, 0.3);
-        sleep(500);
 
-        bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
+        sleep(700);
+        bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
     }
 
-    public void path1(){
-        bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
+    public void path1() {
+        telemetry.addData("Say","Running Path1=low");
+        bot.driveTrain.moveEncoders(0, 12, 0, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
+        bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
         sleep(500);
-
-        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(3000);
+        carouselWheel.setPower(0.475);
+        sleep(3200);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
-        bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
 
-//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
-//        sleep(500);
+        bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -23, 0, 0.4);
+        sleep(500);
         flickerServo.setPosition(-0.5);
         sleep(500);
         flickerServo.setPosition(0.5);
@@ -161,37 +148,35 @@ public class BlueStorageUnit extends LinearOpMode {
         sleep(600);
         arm.setPower(0.0);
         sleep(1000);
-
+        bot.driveTrain.moveEncoders(0, -3, 0, 0.3);
+        sleep(300);
         paddleServo.setPosition(-0.5);
         sleep(1000);
-
-
         arm.setPower(0.3);
+        sleep(700);
+        bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
         sleep(500);
-        //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, 22, 0, 0.3);
-        sleep(500);
-
-        bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
     }
-
     public void runOpMode() {
-        initVuforia();
-        initTfod();
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
-//        leftLatchServo = hardwareMap.servo.get("leftlatch");
+
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         paddleServo = hardwareMap.servo.get("paddle");
+
+//        cameraServo.setPosition(-0.8);--camera servo wont position to negative numbers
+        initVuforia();
+        initTfod();
+
         rightLatchServo.setPosition(0.5);
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
-        cameraServo.setPosition(-0.4);
+
         if (tfod != null) {
             tfod.activate();
 
@@ -201,8 +186,12 @@ public class BlueStorageUnit extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0/9.0);
+            tfod.setZoom(2.5, 20.0 / 40.0);
         }
+        boolean duckDetected1 = false;
+        boolean duckDetected2 = false;
+        boolean duckDetected3 = false;
+
 
         waitForStart();
 
@@ -212,65 +201,81 @@ public class BlueStorageUnit extends LinearOpMode {
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
 
+        int count = 0;
 
-        boolean duckDetected1 = false;
-        boolean duckDetected2 = false;
-        boolean duckDetected3 = false;
+        while (opModeIsActive()) {
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
-                if (tfod != null) {
-
-                    // getUpdatedRecognitions() will return null if no new information is available since
-                    // the last time that call was made.
-                    List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                    // step through the list of recognitions and display boundary info.
                     int i = 0;
+                    boolean isDuckDetected = false;     //  ** ADDED **
                     for (Recognition recognition : updatedRecognitions) {
                         telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-
                         i++;
 
                         // check label to see if the camera now sees a Duck         ** ADDED **
-                        if (recognition.getLabel().equals("Duck")) {            //  ** ADDED **
-                            duckDetected1 = true;                             //  ** ADDED **
-                            telemetry.addData("Object Detected", "Duck");      //  ** ADDED **
-                        } else {                                               //  ** ADDED **
-                            duckDetected1 = false;                            //  ** ADDED **
-                        }                                                      //  ** ADDED **
+                        if (recognition.getLabel().equals("Cube") || recognition.getLabel().equals("Marker")) {            //  ** ADDED **
+
+                            isDuckDetected = true;                             //  ** ADDED **
+                            telemetry.addData("Object Detected", "Cube");
+                        }      //  ** ADDED **
+
+
+                        i++;
                     }
-                    telemetry.update();
-
-
-                    cameraServo.setPosition(0.5);
-                    if (duckDetected1 == true) {
-                        break;}
-
-                    for (int j = 0; i < 10; j++) {
-                        if (updatedRecognitions != null) {
-                            telemetry.addData("DuckDetection2", "path2");
-                            duckDetected2 = true;
+                    if (isDuckDetected == true) {
+                        if (count == 0) {
+                            path1();
+                            break;
+                        } else if (count == 1) {
                             path2();
+                            break;
+                        } else if (count == 2) {
+                            path3();
                             break;
                         }
                     }
-                    if (duckDetected2 == true) {
-                        break;}
-//
-////                    cameraServo.setPosition(0.3);
+                    if (count == 0) {
+//                        cameraServo.setPosition(-1);--camera not working
+                        telemetry.addData("Changed", 2);
+                        sleep(1000);
                     }
+                    else if (count == 1) {
+                        cameraServo.setPosition(1);
+                        telemetry.addData("Changed", 2);
+                        sleep(1000);
+                    }
+                    else if (count == 2) {
+                        path3();
+                    }
+                    count++;
+
+
+
+                    //  ** ADDED **
+                }
+                telemetry.addData("No object", "0");
+                telemetry.update();
+            }
+
+
+        }
+
+
+    }
 
 ////                    path3();
 ////                    break;
 //
-                        // telemetry.update();
-                    }
-                }
-
-            }
+    // telemetry.update();
 
 
-
-        //Detect and add if statements for which path to take (path1, path2, path3)
+    //Detect and add if statements for which path to take (path1, path2, path3)
 
 
     private void initVuforia() {

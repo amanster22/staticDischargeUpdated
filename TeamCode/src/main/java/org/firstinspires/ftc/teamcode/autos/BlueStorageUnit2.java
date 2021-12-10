@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
     public Servo paddleServo = null;
     public Servo cameraServo = null;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
     private static final String[] LABELS = {
             "Ball",
             "Cube",
@@ -132,7 +133,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
         sleep(500);
     }
 
-    public void path1(){
+    public void path1() {
         bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
@@ -157,6 +158,8 @@ public class BlueStorageUnit2 extends LinearOpMode {
         sleep(500);
         flickerServo.setPosition(0.5);
         sleep(100);
+        bot.driveTrain.moveEncoders(0,-2,0,0.3);
+        sleep(100);
         arm.setPower(-0.5);
         sleep(600);
         arm.setPower(0.0);
@@ -170,7 +173,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 22, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 24, 0, 0.3);
         sleep(500);
 
         bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
@@ -178,20 +181,23 @@ public class BlueStorageUnit2 extends LinearOpMode {
     }
 
     public void runOpMode() {
-        initVuforia();
-        initTfod();
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
-//        leftLatchServo = hardwareMap.servo.get("leftlatch");
+
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         paddleServo = hardwareMap.servo.get("paddle");
+
+        cameraServo.setPosition(0);
+        initVuforia();
+        initTfod();
+
         rightLatchServo.setPosition(0.5);
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
-        cameraServo.setPosition(-0.3);
+
         if (tfod != null) {
             tfod.activate();
 
@@ -201,11 +207,12 @@ public class BlueStorageUnit2 extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 20.0/20.0);
+            tfod.setZoom(2.5, 20.0 / 20.0);
         }
         boolean duckDetected1 = false;
         boolean duckDetected2 = false;
         boolean duckDetected3 = false;
+
 
         waitForStart();
 
@@ -214,82 +221,82 @@ public class BlueStorageUnit2 extends LinearOpMode {
          * Activate TensorFlow Object Detection before we wait for the start command.
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
-        
+
         int count = 0;
 
-            while (opModeIsActive()) {
-                if (tfod != null){
-                    // getUpdatedRecognitions() will return null if no new information is available since
-                    // the last time that call was made.
-                    List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-                    if (updatedRecognitions != null) {
-                        telemetry.addData("# Object Detected", updatedRecognitions.size());
+        while (opModeIsActive()) {
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-                        // step through the list of recognitions and display boundary info.
-                        int i = 0;
-                        boolean isDuckDetected = false;     //  ** ADDED **
-                        for (Recognition recognition : updatedRecognitions) {
-                            telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                            i++;
+                    // step through the list of recognitions and display boundary info.
+                    int i = 0;
+                    boolean isDuckDetected = false;     //  ** ADDED **
+                    for (Recognition recognition : updatedRecognitions) {
+                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                        i++;
 
-                            // check label to see if the camera now sees a Duck         ** ADDED **
-                            if (recognition.getLabel().equals("Cube")) {            //  ** ADDED **
+                        // check label to see if the camera now sees a Duck         ** ADDED **
+                        if (recognition.getLabel().equals("Cube") || recognition.getLabel().equals("Marker")) {            //  ** ADDED **
 
-                                isDuckDetected = true;                             //  ** ADDED **
-                                telemetry.addData("Object Detected", "Cube");}      //  ** ADDED **
-
-
-
-                            i++;}
-                        if (isDuckDetected == true) {
-                            if (count == 0) {
-                                path1();
-                                break;
-                            }
-                            else if (count == 1) {
-                                path2();
-                                break;
-                            }
-                            else if (count == 2) {
-                                path3();
-                                break;
-                            }
-                        }
-                        else {
-                            cameraServo.setPosition(cameraServo.getPosition() + 0.1);
-                        }
-                        count++;
+                            isDuckDetected = true;                             //  ** ADDED **
+                            telemetry.addData("Object Detected", "Cube");
+                        }      //  ** ADDED **
 
 
-                            //  ** ADDED **
-                        }
-                        telemetry.addData("No object", "0");
-                        cameraServo.setPosition(0.08);
-                        telemetry.update();
+                        i++;
                     }
+                    if (isDuckDetected == true) {
+                        if (count == 0) {
+                            path1();
+                            break;
+                        } else if (count == 1) {
+                            path2();
+                            break;
+                        } else if (count == 2) {
+                            path3();
+                            break;
+                        }
+                    }
+                    if (count == 0) {
+                        cameraServo.setPosition(0.05);
+                        telemetry.addData("Changed", 2);
+                        sleep(1000);
+                    }
+                    else if (count == 1) {
+                        cameraServo.setPosition(0.1);
+                        telemetry.addData("Changed", 2);
+                        sleep(1000);
+                    }
+                    else if (count == 2) {
+                        path3();
+                    }
+                    count++;
 
 
+
+                    //  ** ADDED **
                 }
-
-
-    
-
-                     
+                telemetry.addData("No object", "0");
+                telemetry.update();
             }
+
+
+        }
+
+
+    }
 
 ////                    path3();
 ////                    break;
 //
-                        // telemetry.update();
+    // telemetry.update();
 
 
-        
-
-
-
-
-
-        //Detect and add if statements for which path to take (path1, path2, path3)
+    //Detect and add if statements for which path to take (path1, path2, path3)
 
 
     private void initVuforia() {
