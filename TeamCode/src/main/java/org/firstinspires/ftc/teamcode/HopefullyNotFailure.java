@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-//@Disabled
+@Disabled
 @TeleOp(name = "Avneesh Testing", group = "Linear OpMode")
 public class HopefullyNotFailure extends OpMode {
 

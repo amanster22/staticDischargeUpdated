@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 //place to try out Auto functions
+@Disabled
 @Autonomous(name = "Auto Testing")
 public class RobotAutoTesting extends LinearOpMode {
     public StaticDischargeBot1 bot;
