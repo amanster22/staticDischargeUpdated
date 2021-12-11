@@ -56,13 +56,15 @@ staticDischargeTeleOp extends OpMode {
         cameraServo=hardwareMap.servo.get("camera");
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
+        telemetry.addData("Servo Pos", paddleServo.getPosition());
+        telemetry.update();
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     @Override
     public void init_loop() {
         rightLatchServo.setPosition(1);
-//        leftLatchServo.setPosition(-0.5);
+
         paddleServo.setPosition(0.5);
         cameraServo.setPosition(-1);
     }
