@@ -16,8 +16,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
-@Autonomous(name = "Blue StorageUnit2")
-public class BlueStorageUnit2 extends LinearOpMode {
+@Autonomous(name = "Blue StorageUnit Yash")
+public class BlueStorageYash extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
@@ -158,7 +158,7 @@ public class BlueStorageUnit2 extends LinearOpMode {
         sleep(500);
         flickerServo.setPosition(0.5);
         sleep(100);
-        bot.driveTrain.moveEncoders(0,-2,0,0.3);
+        bot.driveTrain.moveEncoders(0, -2, 0, 0.3);
         sleep(100);
         arm.setPower(-0.5);
         sleep(600);
@@ -198,6 +198,10 @@ public class BlueStorageUnit2 extends LinearOpMode {
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
 
+        /**
+         * Activate TensorFlow Object Detection before we wait for the start command.
+         * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
+         **/
         if (tfod != null) {
             tfod.activate();
 
@@ -207,96 +211,52 @@ public class BlueStorageUnit2 extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 20.0 / 20.0);
+            tfod.setZoom(1.0, 20.0 / 20.0);
         }
-        boolean duckDetected1 = false;
-        boolean duckDetected2 = false;
-        boolean duckDetected3 = false;
-
-
-        waitForStart();
-
-
-        /**
-         * Activate TensorFlow Object Detection before we wait for the start command.
-         * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
-         **/
-
-        int count = 0;
-
-        while (opModeIsActive()) {
+        int duckDetectedPosition = 0;
+        while (!isStarted()) {
             if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-
                 if (updatedRecognitions != null) {
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
-
-                    // step through the list of recognitions and display boundary info.
-                    int i = 0;
-                    boolean isDuckDetected = false;     //  ** ADDED **
-
-                    for (Recognition recognition : updatedRecognitions) {
-                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                        i++;
-
-
-                        // check label to see if the camera now sees a Duck         ** ADDED **
-                        if (recognition.getLabel().equals("Cube") || recognition.getLabel().equals("Marker")) {            //  ** ADDED **
-
-                            isDuckDetected = true;                             //  ** ADDED **
-                            telemetry.addData("Object Detected", "Cube");
-                        }      //  ** ADDED **
-
-
-                        i++;
+                    if (updatedRecognitions.size() == 0) {
+                        telemetry.addData("No Cube", "Position 3");
+                        duckDetectedPosition = 3;
                     }
-                    if (isDuckDetected == true) {
-                        if (count == 0) {
-                            path1();
-                            break;
-                        } else if (count == 1) {
-                            path2();
-                            break;
-                        } else if (count == 2) {
-                            path3();
-                            break;
-                        }
-                    }
-                    if (count == 0) {
-                        cameraServo.setPosition(0.05);
-                        telemetry.addData("Changed", 2);
-                        sleep(1000);
-                    }
-                    else if (count == 1) {
-                        cameraServo.setPosition(0.1);
-                        telemetry.addData("Changed", 2);
-                        sleep(1000);
-                    }
-                    else if (count == 2) {
-                        path3();
-                    }
-                    count++;
-
-
-
-                    //  ** ADDED **
                 }
-                telemetry.addData("No object", "0");
-                telemetry.update();
+
+                if (updatedRecognitions != null && updatedRecognitions.size() == 1) {
+                    Recognition recog = updatedRecognitions.get(0);
+                    double center = (recog.getRight() + recog.getLeft()) / 2.0;
+                    if (center > (recog.getImageWidth() / 2.0)) {
+                        duckDetectedPosition = 2;
+                        telemetry.addData("Cube Right", "Position 2");
+                    } else {
+                        duckDetectedPosition = 1;
+                        telemetry.addData("Cube Left", "Position 1");
+                    }
+                }
             }
-
-
+            telemetry.update();
         }
-
-
+        /**
+         * Run the camera tensorflow detection before the robot inits, with the while loop and isStarted() command above.
+         */
+        waitForStart();
+        //switch statements need breaks, otherwise case 1 would run all three cases. Look up fallthrough
+        switch (duckDetectedPosition) {
+            case 1:
+                path1();
+                break;
+            case 2:
+                path2();
+                break;
+            case 3:
+                path3();
+                break;
+        }
     }
-
-////                    path3();
-////                    break;
-//
-    // telemetry.update();
 
 
     //Detect and add if statements for which path to take (path1, path2, path3)
@@ -331,5 +291,6 @@ public class BlueStorageUnit2 extends LinearOpMode {
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
     }
 }
+
 
 
