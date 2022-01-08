@@ -190,7 +190,7 @@ public class BlueStorageYash extends LinearOpMode {
         flickerServo = hardwareMap.servo.get("flicker");
         paddleServo = hardwareMap.servo.get("paddle");
 
-        cameraServo.setPosition(0);
+        //cameraServo.setPosition(0);
         initVuforia();
         initTfod();
 

@@ -237,7 +237,7 @@ public class RedStorageUnit2 extends LinearOpMode {
                 break;
 
         }
-        path3();
+
     }
 
 
