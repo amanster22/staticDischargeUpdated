@@ -15,7 +15,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 import java.util.List;
-@Disabled
 @Autonomous(name = "Red StorageUnit2")
 public class RedStorageUnit2 extends LinearOpMode {
 
@@ -187,14 +186,10 @@ public class RedStorageUnit2 extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 20.0 / 40.0);
+            tfod.setZoom(1, 20.0 / 20.0);
         }
-        boolean duckDetected1 = false;
-        boolean duckDetected2 = false;
-        boolean duckDetected3 = false;
 
 
-        waitForStart();
 
 
         /**
@@ -202,73 +197,54 @@ public class RedStorageUnit2 extends LinearOpMode {
          * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          **/
 
-        int count = 0;
-
-        while (opModeIsActive()) {
+        int duckDetectedPosition = 0;
+        while (!isStarted()) {
             if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
-
-                    // step through the list of recognitions and display boundary info.
-                    int i = 0;
-                    boolean isDuckDetected = false;     //  ** ADDED **
-                    for (Recognition recognition : updatedRecognitions) {
-                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                        i++;
-
-                        // check label to see if the camera now sees a Duck         ** ADDED **
-                        if (recognition.getLabel().equals("Cube") || recognition.getLabel().equals("Marker")) {            //  ** ADDED **
-
-                            isDuckDetected = true;                             //  ** ADDED **
-                            telemetry.addData("Object Detected", "Cube");
-                        }      //  ** ADDED **
-
-
-                        i++;
+                    if (updatedRecognitions.size() == 0) {
+                        telemetry.addData("No Cube", "Position 1");
+                        duckDetectedPosition = 1;
                     }
-                    if (isDuckDetected == true) {
-                        if (count == 0) {
-                            path1();
-                            break;
-                        } else if (count == 1) {
-                            path2();
-                            break;
-                        } else if (count == 2) {
-                            path3();
-                            break;
-                        }
-                    }
-                    if (count == 0) {
-//                        cameraServo.setPosition(-1);--camera not working
-                        telemetry.addData("Changed", 2);
-                        sleep(1000);
-                    }
-                    else if (count == 1) {
-                        cameraServo.setPosition(1);
-                        telemetry.addData("Changed", 2);
-                        sleep(1000);
-                    }
-                    else if (count == 2) {
-                        path3();
-                    }
-                    count++;
-
-
-
-                    //  ** ADDED **
                 }
-                telemetry.addData("No object", "0");
-                telemetry.update();
-            }
 
+                if (updatedRecognitions != null && updatedRecognitions.size() == 1) {
+                    Recognition recog = updatedRecognitions.get(0);
+                    double center = (recog.getRight() + recog.getLeft()) / 2.0;
+                    if (center > (recog.getImageWidth() / 2.0)) {
+                        duckDetectedPosition = 3;
+                        telemetry.addData("Cube Right", "Position 3");
+                    } else {
+                        duckDetectedPosition = 2;
+                        telemetry.addData("Cube Left", "Position 2");
+                    }
+                }
+            }
+            telemetry.update();
+        }
+        waitForStart();
+        switch (duckDetectedPosition) {
+            case 1:
+                path1();
+                break;
+            case 2:
+                path2();
+                break;
+            case 3:
+                path3();
+                break;
 
         }
 
-
     }
+
+
+
+
+
+
 
 ////                    path3();
 ////                    break;
