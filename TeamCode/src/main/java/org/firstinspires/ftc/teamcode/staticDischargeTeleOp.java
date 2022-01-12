@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Static Discharge TeleOp", group = "Pushbot")
+@TeleOp(name = "Static Discharge Old TeleOp", group = "Pushbot")
 //@Disabled
 public class
 staticDischargeTeleOp extends OpMode {
