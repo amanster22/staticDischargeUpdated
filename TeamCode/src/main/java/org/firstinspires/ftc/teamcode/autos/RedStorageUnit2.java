@@ -69,7 +69,7 @@ public class RedStorageUnit2 extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -26, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
@@ -104,7 +104,7 @@ public class RedStorageUnit2 extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -23, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
@@ -138,7 +138,7 @@ public class RedStorageUnit2 extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -23, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
         sleep(500);
         flickerServo.setPosition(-0.5);
         sleep(500);
