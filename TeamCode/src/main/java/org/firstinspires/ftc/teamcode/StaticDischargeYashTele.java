@@ -62,7 +62,7 @@ StaticDischargeYashTele extends LinearOpMode {
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     public void initloopRobot() {
-        rightLatchServo.setPosition(-0.7);
+        rightLatchServo.setPosition(-0.8);
 
         paddleServo.setPosition(0.5);
         cameraServo.setPosition(-1);
