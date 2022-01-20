@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Static Discharge Yash TeleOp", group = "Pushbot")
+@TeleOp(name = "Static Discharge Official TeleOp", group = "Pushbot")
 //@Disabled
 public class
-StaticDischargeYashTele extends LinearOpMode {
+StaticDischargeOfficialTeleOp extends LinearOpMode {
 
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
