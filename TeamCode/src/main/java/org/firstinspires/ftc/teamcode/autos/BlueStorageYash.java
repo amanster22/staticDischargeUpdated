@@ -72,7 +72,7 @@ public class BlueStorageYash extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -6, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -9, 0, 0.2);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
@@ -99,7 +99,7 @@ public class BlueStorageYash extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-2.8, 0, 0, 0.3);
         sleep(500);
         carouselWheel.setPower(-0.5);
         sleep(3000);
@@ -112,7 +112,7 @@ public class BlueStorageYash extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -6, 0, 0.2);
 //        sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
@@ -152,7 +152,7 @@ public class BlueStorageYash extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
 
-//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -6, 0, 0.2);
 //        sleep(500);
         flickerServo.setPosition(-0.5);
         sleep(500);
