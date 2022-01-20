@@ -16,8 +16,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
-@Autonomous(name = "Blue StorageUnit Official")
-public class BlueStorageOfficial extends LinearOpMode {
+@Autonomous(name = "Blue StorageUnit Yash")
+public class BlueStorageYash extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
@@ -112,8 +112,8 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 2, 0, 0.2);
-        sleep(500);
+//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
+//        sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
         arm.setPower(0.0);
@@ -126,7 +126,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 25.5, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 28, 0, 0.3);
         sleep(500);
 
         bot.driveTrain.moveEncoders(13.25, 0, 0, 0.3);
@@ -152,8 +152,8 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
 
-        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
-        sleep(500);
+//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
+//        sleep(500);
         flickerServo.setPosition(-0.5);
         sleep(500);
         flickerServo.setPosition(0.5);

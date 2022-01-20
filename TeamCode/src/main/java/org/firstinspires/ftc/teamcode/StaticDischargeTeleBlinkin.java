@@ -1,23 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.internal.system.Deadline;
+
 import java.util.concurrent.TimeUnit;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
-@TeleOp(name = "Static Discharge Official TeleOp", group = "Pushbot")
-//@Disabled
-public class
-StaticDischargeOfficialTeleOp extends LinearOpMode {
+@TeleOp(name = "Static Discharge Tele Blinkin", group = "Pushbot")
+public class StaticDischargeTeleBlinkin extends LinearOpMode {
 
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
@@ -38,7 +34,24 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
-    private DistanceSensor sensorRange;
+
+    private final static int LED_PERIOD = 10;
+
+    private final static int GAMEPAD_LOCKOUT = 500;
+
+    RevBlinkinLedDriver blinkinLedDriver;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
+
+    Telemetry.Item patternName;
+    Telemetry.Item display;
+    DisplayKind displayKind;
+    Deadline ledCycleDeadline;
+    Deadline gamepadRateLimit;
+
+    protected enum DisplayKind {
+        MANUAL,
+        AUTO
+    }
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -57,7 +70,6 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         rollerServo = hardwareMap.servo.get("roller");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
-        sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
@@ -66,11 +78,24 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
         telemetry.addData("Servo Pos", paddleServo.getPosition());
         telemetry.update();
+
+        displayKind = DisplayKind.AUTO;
+
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        blinkinLedDriver.setPattern(pattern);
+
+        display = telemetry.addData("Display Kind: ", displayKind.toString());
+        patternName = telemetry.addData("Pattern: ", pattern.toString());
+
+        ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
+        gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
+        blinkinLedDriver.setPattern(pattern);
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     public void initloopRobot() {
-        rightLatchServo.setPosition(-0.8);
+        rightLatchServo.setPosition(-0.7);
 
         paddleServo.setPosition(0.5);
         cameraServo.setPosition(-1);
@@ -126,13 +151,14 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
             sleep(700);
             arm.setPower(0.0);
             //automated
+
             flickerServo.setPosition(-0.7);
-            sleep(500);
-            arm.setPower(0.6);
+            sleep(1000);
             flickerServo.setPosition(0.5);
+            sleep(700);
+            arm.setPower(0.6);
             sleep(600);
             arm.setPower(0.0);
-
 
         }
 //Paddle Servo
@@ -191,7 +217,6 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
-        telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
     }
 
     /*
