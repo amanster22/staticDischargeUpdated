@@ -5,8 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @TeleOp(name = "Static Discharge Official TeleOp", group = "Pushbot")
 //@Disabled
@@ -32,6 +35,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
+    private DistanceSensor sensorRange;
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -50,6 +54,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         rollerServo = hardwareMap.servo.get("roller");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
+        sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
@@ -118,14 +123,13 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
             sleep(700);
             arm.setPower(0.0);
             //automated
-
             flickerServo.setPosition(-0.7);
-            sleep(1000);
-            flickerServo.setPosition(0.5);
-            sleep(700);
+            sleep(500);
             arm.setPower(0.6);
+            flickerServo.setPosition(0.5);
             sleep(600);
             arm.setPower(0.0);
+
 
         }
 //Paddle Servo
@@ -184,6 +188,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
+        telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
     }
 
     /*
