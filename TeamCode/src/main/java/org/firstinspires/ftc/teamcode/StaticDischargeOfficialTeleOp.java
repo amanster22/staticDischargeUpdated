@@ -38,7 +38,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
-
+    public ElapsedTime Runtime = new ElapsedTime();
     private DistanceSensor sensorRange;
     public RevBlinkinLedDriver lights;
     /*
@@ -89,19 +89,23 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
         flickerServo.setPosition(0.5);
-
+        Runtime.reset();
     }
 
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loopRobot() {
+        if (Runtime.time() >= 40)
+        {
+            telemetry.addData("20 seconds left until End Game", "YAY!");
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
+        }
         double vert = 0;
         double hori = 0;
         double turn = 0;
         double speedUpdate = 1;
         telemetry.addData("Speed:", carouselWheelSpeed);
-
 
         boolean clawOpen = false;
         boolean clawClose = false;
