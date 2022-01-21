@@ -38,7 +38,9 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
+
     private DistanceSensor sensorRange;
+    public RevBlinkinLedDriver lights;
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -46,7 +48,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
-
+        lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
         backLeftMotor = hardwareMap.dcMotor.get("2");
@@ -66,6 +68,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
         telemetry.addData("Servo Pos", paddleServo.getPosition());
         telemetry.update();
+        lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
@@ -86,6 +89,7 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
         flickerServo.setPosition(0.5);
+
     }
 
     /*
@@ -192,6 +196,20 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
         telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
+
+        if(sensorRange.getDistance(DistanceUnit.CM)<10){
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+
+        }
+        else if((sensorRange.getDistance(DistanceUnit.CM)<13)&&(sensorRange.getDistance(DistanceUnit.CM)>11)){
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
+
+        }
+        else if (sensorRange.getDistance(DistanceUnit.CM)>13){
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
+
+        }
+
     }
 
     /*
