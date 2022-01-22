@@ -147,6 +147,10 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
         }
 
         if(gamepad2.dpad_up){
+            frontLeftMotor.setPower(0);
+            backLeftMotor.setPower(0);
+            frontRightMotor.setPower(0);
+            backRightMotor.setPower(0);
             arm.setPower(-0.5);
             sleep(700);
             arm.setPower(0.0);
