@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.SampleRevBlinkinLedDriver;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -31,9 +32,11 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
     public Servo flickerServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
+    public ElapsedTime Runtime = new ElapsedTime();
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
+    public RevBlinkinLedDriver lights;
 
     private final static int LED_PERIOD = 10;
 
@@ -59,7 +62,7 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
-
+        lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
         backLeftMotor = hardwareMap.dcMotor.get("2");
@@ -91,14 +94,17 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
         ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
         blinkinLedDriver.setPattern(pattern);
+        lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     public void initloopRobot() {
+
         rightLatchServo.setPosition(-0.7);
 
         paddleServo.setPosition(0.5);
         cameraServo.setPosition(-1);
+
     }
 
     /*
@@ -111,12 +117,18 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
         flickerServo.setPosition(0.5);
+        Runtime.reset();
     }
 
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loopRobot() {
+        if (Runtime.time() >= 40)
+        {
+            telemetry.addData("20 seconds left until End Game", "YAY!");
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
+        }
         double vert = 0;
         double hori = 0;
         double turn = 0;
