@@ -51,7 +51,7 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
     Deadline ledCycleDeadline;
     Deadline gamepadRateLimit;
 
-    protected enum DisplayKind {
+    public enum DisplayKind {
         MANUAL,
         AUTO
     }

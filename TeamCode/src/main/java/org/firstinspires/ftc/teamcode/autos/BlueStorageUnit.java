@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 import java.util.List;
+@Disabled
 @Autonomous(name = "Blue StorageUnit")
 public class BlueStorageUnit extends LinearOpMode {
 
