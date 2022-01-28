@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Static Discharge Old TeleOp", group = "Pushbot")
+@TeleOp(name = "Static Discharge Old TeleOp that Avneesh stole to test", group = "Pushbot")
 //@Disabled
 public class
 staticDischargeTeleOp extends OpMode {
@@ -20,7 +20,8 @@ staticDischargeTeleOp extends OpMode {
     public DcMotor intakeStars = null;
     public DcMotor armWheels = null;
     public DcMotor arm = null;
-    public Servo rollerServo = null;
+    public DcMotor topIntake = null;
+//     public Servo rollerServo = null; not needed - top is now a motor
     public Servo cameraServo=null;
 //    public Servo leftLatchServo=null;
     public Servo rightLatchServo=null;
@@ -40,14 +41,15 @@ staticDischargeTeleOp extends OpMode {
          * The init() method of the hardware class does all the work here
          */
 
-        frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
+        frontLeftMotor = hardwareMap.dcMotor.get("1");
         backLeftMotor = hardwareMap.dcMotor.get("2");
         backRightMotor = hardwareMap.dcMotor.get("3");
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
-        rollerServo = hardwareMap.servo.get("roller");
+        topIntake = hardwareMap.dcMotor.get("topIntake");
+//        rollerServo = hardwareMap.servo.get("roller"); not needed, top is now
         rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         arm = hardwareMap.dcMotor.get("arm");
@@ -147,9 +149,10 @@ staticDischargeTeleOp extends OpMode {
 //            starSpeed=starSpeed*-1;
             aWheelSpeed=aWheelSpeed;
             intakeStars.setPower(-0.5);
-            armWheels.setPower(aWheelSpeed);
+            armWheels.setPower(-aWheelSpeed); //negative because thats how the motor is oriented
+            topIntake.setPower(-aWheelSpeed);
             //rollerServo.setDirection(Servo.Direction.FORWARD);
-            rollerServo.setPosition(0);
+           // rollerServo.setPosition(0);
             telemetry.addData("Intake:", true);
 
 
@@ -157,13 +160,15 @@ staticDischargeTeleOp extends OpMode {
         if(gamepad1.b){//intake reverse
             intakeStars.setPower(1);
             armWheels.setPower(-1);
-            rollerServo.setPosition(1);
+            topIntake.setPower(1);
+           // rollerServo.setPosition(1);
             telemetry.addData("Intake:", false);
         }
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-            rollerServo.setPosition(-0.5);
+            topIntake.setPower(0);
+            // rollerServo.setPosition(-0.5);
             telemetry.addData("Intake:", false);
         }
 

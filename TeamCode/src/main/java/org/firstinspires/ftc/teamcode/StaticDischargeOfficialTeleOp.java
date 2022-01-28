@@ -140,7 +140,11 @@ StaticDischargeOfficialTeleOp extends LinearOpMode {
             flickerServo.setPosition(0.5);
             sleep(600);
             arm.setPower(0.0);
-
+            //we need to have a function to kill drivetrain which ig would be:
+//            frontLeftMotor.setPower(0);
+//            frontRightMotor.setPower(0);
+//            backLeftMotor.setPower(0);
+//            backRightMotor.setPower(0);
 
         }
 //Paddle Servo
