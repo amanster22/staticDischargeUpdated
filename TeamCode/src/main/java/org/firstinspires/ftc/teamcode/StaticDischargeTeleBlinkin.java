@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
 import java.util.concurrent.TimeUnit;
 
+@Disabled
 @TeleOp(name = "Static Discharge Tele Blinkin", group = "Pushbot")
 public class StaticDischargeTeleBlinkin extends LinearOpMode {
 
@@ -167,7 +169,6 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
             sleep(700);
             arm.setPower(0.0);
             //automated
-
             flickerServo.setPosition(-0.7);
             sleep(1000);
             flickerServo.setPosition(0.5);
