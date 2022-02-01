@@ -55,7 +55,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
-        rollerServo = hardwareMap.servo.get("roller");
+        rollerServo = hardwareMap.servo.get("rollerS");
         rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
