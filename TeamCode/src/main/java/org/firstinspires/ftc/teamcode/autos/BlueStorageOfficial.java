@@ -17,7 +17,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
-@Autonomous(name = "Blue StorageUnit Yash")
+@Autonomous(name = "Blue StorageUnit Official")
 public class BlueStorageOfficial extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
@@ -193,7 +193,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         upperRoller = hardwareMap.servo.get("roller2");
-        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
         pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         blinkinLedDriver.setPattern(pattern);
 
