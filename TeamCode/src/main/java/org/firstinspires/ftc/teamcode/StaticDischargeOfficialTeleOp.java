@@ -10,7 +10,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
+
 import java.util.concurrent.TimeUnit;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -29,19 +31,20 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public DcMotor arm = null;
 
     public Servo rollerServo = null;
-    public Servo cameraServo=null;
+    public Servo cameraServo = null;
     //    public Servo leftLatchServo=null;
-    public Servo rightLatchServo=null;
-    public Servo paddleServo=null;
-    public Servo flickerServo=null;
-    double starSpeed=0.5;
+    // public Servo rightLatchServo=null;
+    public Servo paddleServo = null;
+    public Servo flickerServo = null;
+    public ElapsedTime Runtime = new ElapsedTime();
+    public RevBlinkinLedDriver lights;
+    double starSpeed = 0.5;
     double carouselWheelSpeed = 0;
     double aWheelSpeed = 0.95;
     boolean lastUp = true;
     boolean lastDown = true;
-    public ElapsedTime Runtime = new ElapsedTime();
     private DistanceSensor sensorRange;
-    public RevBlinkinLedDriver lights;
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -49,7 +52,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
-        lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
+        lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
         backLeftMotor = hardwareMap.dcMotor.get("2");
@@ -58,19 +61,22 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
         rollerServo = hardwareMap.servo.get("rollerS");
- //       rightLatchServo = hardwareMap.servo.get("rightlatch");
-//        leftLatchServo = hardwareMap.servo.get("leftlatch");
+//       rightLatchServo = hardwareMap.servo.get("rightlatch");
+//       leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
 //        paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
-        cameraServo=hardwareMap.servo.get("camera");
+        cameraServo = hardwareMap.servo.get("camera");
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
-        telemetry.addData("Servo Pos", paddleServo.getPosition());
+        telemetry.addData("Servo Pos", paddleServo.getPosition(
+
+        ));
         telemetry.update();
         lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
     }
+
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     public void initloopRobot() {
@@ -97,8 +103,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loopRobot() {
-        if (Runtime.time() >= 40)
-        {
+        if (Runtime.time() >= 40) {
             telemetry.addData("20 seconds left until End Game", "YAY!");
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
         }
@@ -124,13 +129,12 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if (gamepad1.right_bumper) {
             speedUpdate = 0.2;
             telemetry.addData("Say", "Speed:slow");
-        }
-        else if (gamepad1.left_bumper){
+        } else if (gamepad1.left_bumper) {
             speedUpdate = 1;
             telemetry.addData("Say", "Speed:normal");
         }
 
-        if(gamepad2.dpad_up){
+        if (gamepad2.dpad_up) {
             frontLeftMotor.setPower(0);
             frontRightMotor.setPower(0);
             backLeftMotor.setPower(0);
@@ -150,17 +154,15 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
         }
 //Paddle Servo
-        if(gamepad2.right_trigger == 1){
+        if (gamepad2.right_trigger == 1) {
             paddleServo.setPosition(-0.5);
-        }
-        else if (gamepad2.right_trigger == 0) {
+        } else if (gamepad2.right_trigger == 0) {
             paddleServo.setPosition(0.5);
         }
 //Flicker Servo
-        if(gamepad2.left_trigger == 1){
+        if (gamepad2.left_trigger == 1) {
             flickerServo.setPosition(-0.5);
-        }
-        else if (gamepad2.left_trigger == 0) {
+        } else if (gamepad2.left_trigger == 0) {
             flickerServo.setPosition(0.5);
         }
 
@@ -181,13 +183,13 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
 
         }
-        if(gamepad1.b){//intake reverse
+        if (gamepad1.b) {//intake reverse
             intakeStars.setPower(1);
             armWheels.setPower(-1);
             rollerServo.setPosition(1);
             telemetry.addData("Intake:", false);
         }
-        if(gamepad1.x){//intake off
+        if (gamepad1.x) {//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
             rollerServo.setPosition(-0.5);
@@ -207,15 +209,13 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         backRightMotor.setPower(speedUpdate * (vert + hori - turn));
         telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
 
-        if(sensorRange.getDistance(DistanceUnit.CM)<10){
+        if (sensorRange.getDistance(DistanceUnit.CM) < 10) {
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
 
-        }
-        else if((sensorRange.getDistance(DistanceUnit.CM)<13)&&(sensorRange.getDistance(DistanceUnit.CM)>11)){
+        } else if ((sensorRange.getDistance(DistanceUnit.CM) < 13) && (sensorRange.getDistance(DistanceUnit.CM) > 11)) {
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
 
-        }
-        else if (sensorRange.getDistance(DistanceUnit.CM)>13){
+        } else if (sensorRange.getDistance(DistanceUnit.CM) > 13) {
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
 
         }

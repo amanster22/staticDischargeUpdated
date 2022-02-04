@@ -150,7 +150,7 @@ staticDischargeTeleOp extends OpMode {
             aWheelSpeed=aWheelSpeed;
             intakeStars.setPower(-0.5);
             armWheels.setPower(-aWheelSpeed); //negative because thats how the motor is oriented
-            topIntake.setPower(-aWheelSpeed);
+            topIntake.setPower(aWheelSpeed);
             //rollerServo.setDirection(Servo.Direction.FORWARD);
            // rollerServo.setPosition(0);
             telemetry.addData("Intake:", true);
@@ -159,8 +159,8 @@ staticDischargeTeleOp extends OpMode {
         }
         if(gamepad1.b){//intake reverse
             intakeStars.setPower(1);
-            armWheels.setPower(-1);
-            topIntake.setPower(1);
+            armWheels.setPower(1);
+            topIntake.setPower(-1);
            // rollerServo.setPosition(1);
             telemetry.addData("Intake:", false);
         }
