@@ -21,7 +21,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     //    public Servo leftLatchServo=null;
-    public Servo rightLatchServo = null;
+    //public Servo rightLatchServo = null;
     public DcMotor arm = null;
     public Servo flickerServo = null;
     public Servo paddleServo = null;
@@ -162,7 +162,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
     public void runOpMode() {
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
         carouselWheel = hardwareMap.dcMotor.get("wheel");
-        rightLatchServo = hardwareMap.servo.get("rightlatch");
+        //rightLatchServo = hardwareMap.servo.get("rightlatch");
 
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
@@ -173,7 +173,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         initVuforia();
         initTfod();
 
-        rightLatchServo.setPosition(0.5);
+        //rightLatchServo.setPosition(0.5);
         paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
 
