@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 import java.util.concurrent.TimeUnit;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -27,11 +26,11 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public DcMotor intakeStars = null;
     public DcMotor armWheels = null;
     public DcMotor arm = null;
-
     public Servo rollerServo = null;
     public Servo cameraServo=null;
+    public Servo upperRoller = null;
     //    public Servo leftLatchServo=null;
-    // public Servo rightLatchServo=null;
+//    public Servo rightLatchServo=null;
     public Servo paddleServo=null;
     public Servo flickerServo=null;
     double starSpeed=0.5;
@@ -58,13 +57,14 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
         rollerServo = hardwareMap.servo.get("rollerS");
- //       rightLatchServo = hardwareMap.servo.get("rightlatch");
+//        rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
         paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
         cameraServo=hardwareMap.servo.get("camera");
+        upperRoller=hardwareMap.servo.get("roller2");
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
         telemetry.addData("Servo Pos", paddleServo.getPosition());
@@ -74,7 +74,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     public void initloopRobot() {
-        //rightLatchServo.setPosition(-0.8);
+//        rightLatchServo.setPosition(-0.8);
 
         paddleServo.setPosition(0.5);
         cameraServo.setPosition(-1);
@@ -84,8 +84,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
      * Code to run ONCE when the driver hits PLAY
      */
     public void startRobot() {
-        intakeStars.setPower(-1);
-        sleep(3000);
+        intakeStars.setPower(1);
+        sleep(1000);
         intakeStars.setPower(0);
 //        leftLatchServo.setPosition(-0.5);
         paddleServo.setPosition(0.5);
@@ -173,10 +173,11 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
         if (gamepad1.a) {//intake on
 //            starSpeed=starSpeed*-1;
-            intakeStars.setPower(-0.5);
+            intakeStars.setPower(0.5);
             armWheels.setPower(aWheelSpeed);
             //rollerServo.setDirection(Servo.Direction.FORWARD);
             rollerServo.setPosition(1);
+            upperRoller.setPosition(0);
             telemetry.addData("Intake:", true);
 
 
@@ -185,12 +186,14 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             intakeStars.setPower(1);
             armWheels.setPower(1);
             rollerServo.setPosition(0);
+            upperRoller.setPosition(1);
             telemetry.addData("Intake:", false);
         }
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
             rollerServo.setPosition(-0.5);
+            upperRoller.setPosition(-0.5);
             telemetry.addData("Intake:", false);
         }
 
