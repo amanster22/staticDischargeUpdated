@@ -47,6 +47,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
+        rollerServo = hardwareMap.servo.get("roller");
         lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
@@ -55,7 +56,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
-        rollerServo = hardwareMap.servo.get("rollerS");
+
         rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
@@ -95,7 +96,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loopRobot() {
-        if (Runtime.time() >= 40)
+        if (Runtime.time() >= 110)
         {
             telemetry.addData("20 seconds left until End Game", "YAY!");
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
