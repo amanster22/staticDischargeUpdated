@@ -25,7 +25,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
     //public Servo rightLatchServo = null;
     public DcMotor arm = null;
     public Servo flickerServo = null;
-    public Servo paddleServo = null;
+    public Servo upperRoller = null;
     public Servo cameraServo = null;
     public RevBlinkinLedDriver lights;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
@@ -79,7 +79,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1600);
         flickerServo.setPosition(-0.5);
         sleep(1000);
-        flickerServo.setPosition(0.5);
+        flickerServo.setPosition(0.55);
         sleep(500);
         arm.setPower(0.3);
         sleep(700);
@@ -114,7 +114,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1600);
         flickerServo.setPosition(-0.5);
         sleep(1000);
-        flickerServo.setPosition(0.5);
+        flickerServo.setPosition(0.55);
         sleep(500);
         arm.setPower(0.3);
 
@@ -146,7 +146,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         flickerServo.setPosition(-0.5);
         sleep(500);
-        flickerServo.setPosition(0.5);
+        flickerServo.setPosition(0.55);
         sleep(100);
         arm.setPower(-0.5);
         sleep(600);
@@ -154,7 +154,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1000);
         bot.driveTrain.moveEncoders(0, -3, 0, 0.3);
         sleep(300);
-        paddleServo.setPosition(-0.5);
+        upperRoller.setPosition(0);
         sleep(1000);
         arm.setPower(0.3);
         sleep(700);
@@ -171,7 +171,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
-        paddleServo = hardwareMap.servo.get("paddle");
+        upperRoller = hardwareMap.servo.get("roller2");
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
         pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         blinkinLedDriver.setPattern(pattern);
@@ -181,7 +181,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         initTfod();
 
         //rightLatchServo.setPosition(0.5);
-        paddleServo.setPosition(0.35);
+
         flickerServo.setPosition(0.5);
 
         if (tfod != null) {

@@ -26,7 +26,7 @@ public class BlueStorageOfficial extends LinearOpMode {
     //public Servo rightLatchServo = null;
     public DcMotor arm = null;
     public Servo flickerServo = null;
-    public Servo paddleServo = null;
+    public Servo upperRoller = null;
     public Servo cameraServo = null;
     public RevBlinkinLedDriver lights;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
@@ -169,8 +169,9 @@ public class BlueStorageOfficial extends LinearOpMode {
         arm.setPower(0.0);
         sleep(1000);
 
-        paddleServo.setPosition(-0.5);
-        sleep(1000);
+        upperRoller.setPosition(0);
+        sleep(3000);
+
 
         arm.setPower(0.3);
         sleep(500);
@@ -191,7 +192,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
-        paddleServo = hardwareMap.servo.get("paddle");
+        upperRoller = hardwareMap.servo.get("roller2");
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
         pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         blinkinLedDriver.setPattern(pattern);
@@ -201,7 +202,6 @@ public class BlueStorageOfficial extends LinearOpMode {
         initTfod();
 
         //rightLatchServo.setPosition(0.5);
-        paddleServo.setPosition(0.35);
         flickerServo.setPosition(0.5);
 
         /**
