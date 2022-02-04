@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.autos;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -26,8 +27,11 @@ public class RedStorageUnitOffical extends LinearOpMode {
     public Servo flickerServo = null;
     public Servo paddleServo = null;
     public Servo cameraServo = null;
+    public RevBlinkinLedDriver lights;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private ElapsedTime runtime = new ElapsedTime();
+    RevBlinkinLedDriver blinkinLedDriver;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
     private static final String[] LABELS = {
             "Ball",
             "Cube",
@@ -168,6 +172,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         paddleServo = hardwareMap.servo.get("paddle");
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        blinkinLedDriver.setPattern(pattern);
 
 //        cameraServo.setPosition(-0.8);--camera servo wont position to negative numbers
         initVuforia();
@@ -207,6 +214,8 @@ public class RedStorageUnitOffical extends LinearOpMode {
                     if (updatedRecognitions.size() == 0) {
                         telemetry.addData("No Cube", "Position 1");
                         duckDetectedPosition = 1;
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.HOT_PINK;
+                        blinkinLedDriver.setPattern(pattern);
                     }
                 }
 
@@ -216,19 +225,26 @@ public class RedStorageUnitOffical extends LinearOpMode {
                     if (center > (recog.getImageWidth() / 2.0)) {
                         duckDetectedPosition = 3;
                         telemetry.addData("Cube Right", "Position 3");
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+                        blinkinLedDriver.setPattern(pattern);
                     } else {
                         duckDetectedPosition = 2;
                         telemetry.addData("Cube Left", "Position 2");
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+                        blinkinLedDriver.setPattern(pattern);
                     }
                 }
             }
             telemetry.update();
         }
         waitForStart();
+        pattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
+        blinkinLedDriver.setPattern(pattern);
         switch (duckDetectedPosition) {
             case 1:
                 path1();
                 break;
+
             case 2:
                 path2();
                 break;

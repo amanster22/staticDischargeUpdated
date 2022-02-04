@@ -46,7 +46,7 @@ public class StaticDischargeTeleBlinkin extends LinearOpMode {
 
     RevBlinkinLedDriver blinkinLedDriver;
     RevBlinkinLedDriver.BlinkinPattern pattern;
-
+//
     Telemetry.Item patternName;
     Telemetry.Item display;
     DisplayKind displayKind;
