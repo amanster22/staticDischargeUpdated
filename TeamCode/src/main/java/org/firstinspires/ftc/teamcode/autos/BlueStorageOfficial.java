@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.autos;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,8 +28,11 @@ public class BlueStorageOfficial extends LinearOpMode {
     public Servo flickerServo = null;
     public Servo paddleServo = null;
     public Servo cameraServo = null;
+    public RevBlinkinLedDriver lights;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private ElapsedTime runtime = new ElapsedTime();
+    RevBlinkinLedDriver blinkinLedDriver;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
     private static final String[] LABELS = {
             "Ball",
             "Cube",
@@ -188,6 +192,9 @@ public class BlueStorageOfficial extends LinearOpMode {
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         paddleServo = hardwareMap.servo.get("paddle");
+        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        blinkinLedDriver.setPattern(pattern);
 
         //cameraServo.setPosition(0);
         initVuforia();
@@ -222,6 +229,8 @@ public class BlueStorageOfficial extends LinearOpMode {
                     if (updatedRecognitions.size() == 0) {
                         telemetry.addData("No Cube", "Position 3");
                         duckDetectedPosition = 3;
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+                        blinkinLedDriver.setPattern(pattern);
                     }
                 }
 
@@ -230,9 +239,13 @@ public class BlueStorageOfficial extends LinearOpMode {
                     double center = (recog.getRight() + recog.getLeft()) / 2.0;
                     if (center > (recog.getImageWidth() / 2.0)) {
                         duckDetectedPosition = 2;
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+                        blinkinLedDriver.setPattern(pattern);
                         telemetry.addData("Cube Right", "Position 2");
                     } else {
                         duckDetectedPosition = 1;
+                        pattern = RevBlinkinLedDriver.BlinkinPattern.HOT_PINK;
+                        blinkinLedDriver.setPattern(pattern);
                         telemetry.addData("Cube Left", "Position 1");
                     }
                 }
@@ -243,6 +256,8 @@ public class BlueStorageOfficial extends LinearOpMode {
          * Run the camera tensorflow detection before the robot inits, with the while loop and isStarted() command above.
          */
         waitForStart();
+        pattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
+        blinkinLedDriver.setPattern(pattern);
         //switch statements need breaks, otherwise case 1 would run all three cases. Look up fallthrough
         switch (duckDetectedPosition) {
             case 1:

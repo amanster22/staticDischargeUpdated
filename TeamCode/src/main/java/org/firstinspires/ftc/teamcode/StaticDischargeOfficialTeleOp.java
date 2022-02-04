@@ -31,12 +31,12 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public Servo rollerServo = null;
     public Servo cameraServo=null;
     //    public Servo leftLatchServo=null;
-    public Servo rightLatchServo=null;
+    // public Servo rightLatchServo=null;
     public Servo paddleServo=null;
     public Servo flickerServo=null;
     double starSpeed=0.5;
     double carouselWheelSpeed = 0;
-    double aWheelSpeed = 0.95;
+    double aWheelSpeed = -0.75;
     boolean lastUp = true;
     boolean lastDown = true;
     public ElapsedTime Runtime = new ElapsedTime();
@@ -62,7 +62,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
-//        paddleServo = hardwareMap.servo.get("paddle");
+        paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
         cameraServo=hardwareMap.servo.get("camera");
         // Send telemetry message to signify robot waiting;
@@ -176,15 +176,15 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             intakeStars.setPower(-0.5);
             armWheels.setPower(aWheelSpeed);
             //rollerServo.setDirection(Servo.Direction.FORWARD);
-            rollerServo.setPosition(0);
+            rollerServo.setPosition(1);
             telemetry.addData("Intake:", true);
 
 
         }
         if(gamepad1.b){//intake reverse
             intakeStars.setPower(1);
-            armWheels.setPower(-1);
-            rollerServo.setPosition(1);
+            armWheels.setPower(1);
+            rollerServo.setPosition(0);
             telemetry.addData("Intake:", false);
         }
         if(gamepad1.x){//intake off
