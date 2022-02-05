@@ -142,12 +142,12 @@ public class BlueStorageOfficial extends LinearOpMode {
     public void path1() {
         // Lowest Level
         bot.driveTrain.moveEncoders(11.5, 0, 0, 0.2);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.3);
-        sleep(500);
+        sleep(800);
+        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.2);
+        sleep(800);
 
-        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.3);
-        sleep(500);
+        bot.driveTrain.moveEncoders(-2.76, 0, 0, 0.2);
+        sleep(800);
         carouselWheel.setPower(-0.5);
         sleep(3000);
         carouselWheel.setPower(0);
@@ -158,14 +158,14 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
 
-        flickerServo.setPosition(-0.5);
-        sleep(500);
+        flickerServo.setPosition(-0.45);
+        sleep(1500);
         flickerServo.setPosition(0.5);
-        sleep(100);
+        sleep(500);
         bot.driveTrain.moveEncoders(0, -2, 0, 0.3);
-        sleep(100);
+        sleep(800);
         arm.setPower(-0.5);
-        sleep(600);
+        sleep(800);
         arm.setPower(0.0);
         sleep(1000);
 
