@@ -164,6 +164,13 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             flickerServo.setPosition(0.5);
         }
 
+        if (gamepad2.dpad_down) {
+            arm.setPower(-0.5);
+            sleep(200);
+            arm.setPower(0.4);
+            arm.setPower(0);
+        }
+
         carouselWheel.setPower(.6 * gamepad2.left_stick_y);
         telemetry.addData("speed", carouselWheel.getPower());
         telemetry.update();

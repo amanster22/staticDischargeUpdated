@@ -138,22 +138,21 @@ public class RedStorageUnitOffical extends LinearOpMode {
         carouselWheel.setPower(0);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(0, 32.4, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, 33.25, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
+        bot.driveTrain.moveEncoders(0, 0, -0.325, 0.3);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -27.5, 0, 0.4);
         sleep(500);
         flickerServo.setPosition(-0.5);
-        sleep(500);
+        sleep(1000);
         flickerServo.setPosition(0.55);
-        sleep(100);
+        sleep(1000);
         arm.setPower(-0.5);
         sleep(600);
         arm.setPower(0.0);
         sleep(1000);
-        bot.driveTrain.moveEncoders(0, -3, 0, 0.3);
-        sleep(300);
+
         upperRoller.setPosition(0);
         sleep(1000);
         arm.setPower(0.3);

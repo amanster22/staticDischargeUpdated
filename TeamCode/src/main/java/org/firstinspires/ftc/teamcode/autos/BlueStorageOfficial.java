@@ -59,17 +59,17 @@ public class BlueStorageOfficial extends LinearOpMode {
 
     public void path3() {
         // Highest level
-        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.2);
-        sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.4);
+        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
+        sleep(1000);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(-2.78, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
         sleep(500);
         carouselWheel.setPower(-0.5);
         sleep(3000);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(32, 0, 0, 0.6);
+        bot.driveTrain.moveEncoders(33.75, 0, 0, 0.6);
         sleep(500);
 //        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
 //        sleep(200);
@@ -77,8 +77,8 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -9.8, 0, 0.2);
-        sleep(500);
+        bot.driveTrain.moveEncoders(0, -9, 0, 0.2);
+        sleep(2000);
         arm.setPower(-0.5);
         sleep(1000);
         arm.setPower(0.0);
@@ -91,16 +91,16 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 30, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 31, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(13.8, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(13.75, 0, 0, 0.3);
         sleep(500);
     }
 
     public void path2() {
         // Middle Level
-        bot.driveTrain.moveEncoders(10.7, 0, 0, 0.2);
+        bot.driveTrain.moveEncoders(11, 0, 0, 0.2);
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.25, 0, 0.4);
         sleep(500);
@@ -118,7 +118,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -3.5, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, -2.89, 0, 0.2);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
@@ -132,7 +132,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.02, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 27.6, 0, 0.3);
+        bot.driveTrain.moveEncoders(0, 25.75, 0, 0.3);
         sleep(500);
 
         bot.driveTrain.moveEncoders(14.5, 0, 0, 0.3);
@@ -151,13 +151,15 @@ public class BlueStorageOfficial extends LinearOpMode {
         carouselWheel.setPower(-0.5);
         sleep(3000);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(34, 0, 0, 0.6);
+        bot.driveTrain.moveEncoders(34, 0, 0, 0.4);
         sleep(500);
 
         bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(1000);
+        bot.driveTrain.moveEncoders(0, -5, 0, 0.4);
+        sleep(300);
         flickerServo.setPosition(-0.5);
         sleep(1000);
         flickerServo.setPosition(0.55);
@@ -166,8 +168,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(800);
         arm.setPower(0.0);
         sleep(1000);
-        bot.driveTrain.moveEncoders(0, -5, 0, 0.4);
-        sleep(300);
+
         upperRoller.setPosition(0);
         sleep(1000);
         arm.setPower(0.3);
@@ -175,7 +176,7 @@ public class BlueStorageOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 26, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(13.5, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(15.25, 0, 0, 0.3);
         sleep(500);
     }
 
