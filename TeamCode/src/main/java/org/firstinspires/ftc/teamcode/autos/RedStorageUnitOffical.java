@@ -62,7 +62,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -6.8, 0, 0.3);
         sleep(500);
         carouselWheel.setPower(0.475);
         sleep(3200);
@@ -73,7 +73,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, -29, 0, 0.4);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
@@ -93,7 +93,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
 
     public void path2() {
         telemetry.addData("Say","Running Path2=middle");
-        bot.driveTrain.moveEncoders(0, 12, 0, 0.6);
+        bot.driveTrain.moveEncoders(0, 12, 0, 0.5);
         sleep(500);
         bot.driveTrain.moveEncoders(-16.75, 0, 0, 0.4);
         sleep(500);
@@ -108,8 +108,8 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, -0.325, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -25, 0, 0.4);
-        sleep(500);
+        bot.driveTrain.moveEncoders(0, -24.4, 0, 0.3);
+        sleep(1000);
         arm.setPower(-0.5);
         sleep(1600);
         flickerServo.setPosition(-0.5);
@@ -119,9 +119,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         arm.setPower(0.3);
 
         sleep(700);
-        bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, 26, 0, 0.3);
         sleep(500);
-        bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
+        bot.driveTrain.moveEncoders(-11.75, 0, 0, 0.3);
         sleep(500);
     }
 
