@@ -118,8 +118,8 @@ public class BlueStorageOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
-//        sleep(500);
+        bot.driveTrain.moveEncoders(0, -2, 0, 0.2);
+        sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
         arm.setPower(0.0);
