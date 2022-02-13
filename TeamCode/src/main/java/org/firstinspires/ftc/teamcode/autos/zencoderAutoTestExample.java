@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.autos;
 
 import android.provider.Telephony;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @Disabled
 @Autonomous(name = "EncoderHolonomicDrive", group = "StaticDischarge")
 
-public class encoderAutoTestExample extends LinearOpMode {
+public class zencoderAutoTestExample extends LinearOpMode {
 //new message
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();

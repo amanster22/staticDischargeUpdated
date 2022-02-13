@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -40,7 +40,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Disabled
 @Autonomous(name = "StaticDischargeEncoderAuto", group = "Pushbot")
 
-public class StaticDischargeAuto extends LinearOpMode {
+public class zStaticDischargeAuto extends LinearOpMode {
 
     /* Declare OpMode members. */
     public DcMotor frontLeftMotor = null;

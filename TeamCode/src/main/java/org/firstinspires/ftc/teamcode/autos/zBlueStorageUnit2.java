@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.List;
 @Disabled
 @Autonomous(name = "Blue StorageUnit2")
-public class BlueStorageUnit2 extends LinearOpMode {
+public class zBlueStorageUnit2 extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;

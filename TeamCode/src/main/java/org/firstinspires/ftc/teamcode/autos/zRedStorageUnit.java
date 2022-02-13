@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
 @Disabled
 @Autonomous(name = "Red StorageUnit")
-public class RedStorageUnit extends LinearOpMode {
+public class zRedStorageUnit extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;

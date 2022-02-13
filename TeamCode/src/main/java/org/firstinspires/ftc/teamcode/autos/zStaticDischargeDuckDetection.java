@@ -44,9 +44,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 
-
+@Disabled
 @Autonomous(name = "Duck Detection", group = "Concept")
-public class StaticDischargeDuckDetection extends LinearOpMode {
+public class zStaticDischargeDuckDetection extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
      *  0: Ball,

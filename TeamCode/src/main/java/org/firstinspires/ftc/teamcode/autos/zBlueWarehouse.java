@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 @Disabled
 @Autonomous(name = "Blue Warehouse")
-public class BlueWarehouse extends LinearOpMode {
+public class zBlueWarehouse extends LinearOpMode {
 //Daniel
 // Says hi
     public StaticDischargeBot1 bot;

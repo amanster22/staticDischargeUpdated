@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.botconfigs.StaticDischargeBot1;
 @Disabled
 @Autonomous(name = "Blue God Auto")
-public class BlueGodAuto extends LinearOpMode{
+public class zBlueGodAuto extends LinearOpMode{
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
     //    public Servo leftLatchServo=null;
