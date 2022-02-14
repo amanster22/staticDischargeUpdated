@@ -20,25 +20,39 @@ import java.util.List;
 @Autonomous(name = "Blue StorageUnit Official")
 public class BlueStorageUnitOfficial extends LinearOpMode {
 
+
+    /**
+     * Initilizations of all of hardware
+     */
     public StaticDischargeBot1 bot;
     public DcMotor carouselWheel = null;
-    //    public Servo leftLatchServo=null;
+    //public Servo leftLatchServo=null;
     //public Servo rightLatchServo = null;
     public DcMotor arm = null;
     public Servo flickerServo = null;
     public Servo upperRoller = null;
     public Servo cameraServo = null;
     public RevBlinkinLedDriver lights;
-    private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private ElapsedTime runtime = new ElapsedTime();
     RevBlinkinLedDriver blinkinLedDriver;
     RevBlinkinLedDriver.BlinkinPattern pattern;
+    //public Servo flipServo = null;
+    //public ElapsedTime runtime = new ElapsedTime();
+
+
+
+    /**
+     * Vuforia
+     */
+    private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
+
     private static final String[] LABELS = {
             "Ball",
             "Cube",
             "Duck",
             "Marker"
     };
+
     private static final String VUFORIA_KEY =
             "Ae+gmGj/////AAABmWz20p9iPUvOnbOi93QfB7sXbfkCt0bYRo0ZsF9MfCnyyqSzGT50iAvJq63Zsze7uk3efapcDwvsUKu7VS7cI0PKl2NJjJc3WzUzZw66E7qNLah2J06uP5XNWi262fa0EcXDFRazWernOoMDrdd2Rh6W1l5Wo9m6TWPDXeToJWbxoEAlURg7wosy4dIU5tGFcQNZ8B9ZODO+FxzYKUz7HOQmZ2FVHF7kGtWJsk+7ikLsh80gtIQFs6M9qY8gvTyhUPZJKzzvTGSvbbotaVzpzWd4Brvl1w00NXnGy/rVVr/cvN+6bBIN2/S/Qrxx4OhFF01r5eTNDshoiQV9xTJQ2Zvcl7eVB1C8lqe1RdtM8I1L";
 
@@ -54,25 +68,30 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
      */
     private TFObjectDetector tfod;
 
-//    public Servo flipServo = null;
-//    public ElapsedTime runtime = new ElapsedTime();
 
+
+
+    /**
+     * Highest path level
+     */
     public void path3() {
-        // Highest level
+
+        //Pathing to the carousel wheel
         bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
         sleep(1000);
         bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
         sleep(500);
-
         bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
         sleep(500);
         carouselWheel.setPower(-0.5);
         sleep(3000);
         carouselWheel.setPower(0);
+        sleep(250);
+
         bot.driveTrain.moveEncoders(33.75, 0, 0, 0.6);
         sleep(500);
-//        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
-//        sleep(200);
+        //bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
+        //sleep(200);
         bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
@@ -96,6 +115,7 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
 
         bot.driveTrain.moveEncoders(13.75, 0, 0, 0.3);
         sleep(500);
+
     }
 
     public void path2() {

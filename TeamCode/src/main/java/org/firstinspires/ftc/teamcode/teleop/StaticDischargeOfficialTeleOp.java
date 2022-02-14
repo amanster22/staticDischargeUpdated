@@ -174,6 +174,9 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         }
 
         carouselWheel.setPower(.6 * gamepad2.left_stick_y);
+        if (gamepad2.left_stick_y > 0.001) {
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
+        }
         telemetry.addData("speed", carouselWheel.getPower());
         telemetry.update();
 
