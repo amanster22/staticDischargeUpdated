@@ -133,6 +133,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         }
 
         if(gamepad2.dpad_up){
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_OCEAN_PALETTE);
             frontLeftMotor.setPower(0);
             frontRightMotor.setPower(0);
             backLeftMotor.setPower(0);
@@ -174,6 +175,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         }
 
         carouselWheel.setPower(.6 * gamepad2.left_stick_y);
+        lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
         telemetry.addData("speed", carouselWheel.getPower());
         telemetry.update();
 
@@ -187,6 +189,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             //rollerServo.setDirection(Servo.Direction.FORWARD);
             rollerServo.setPosition(1);
             upperRoller.setPosition(0);
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
             telemetry.addData("Intake:", true);
 
 
@@ -197,6 +200,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             rollerServo.setPosition(0);
             upperRoller.setPosition(1);
             telemetry.addData("Intake:", false);
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
         }
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
