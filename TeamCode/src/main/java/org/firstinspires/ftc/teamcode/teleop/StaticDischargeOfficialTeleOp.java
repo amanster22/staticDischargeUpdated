@@ -78,7 +78,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public void initloopRobot() {
 //        rightLatchServo.setPosition(-0.8);
 
-        paddleServo.setPosition(0.5);
+        //paddleServo.setPosition(-0.5);
         cameraServo.setPosition(-1);
     }
 
@@ -90,8 +90,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         sleep(1000);
         intakeStars.setPower(0);
 //        leftLatchServo.setPosition(-0.5);
-        paddleServo.setPosition(0.5);
-        flickerServo.setPosition(0.5);
+        //paddleServo.setPosition(-0.5);
+        flickerServo.setPosition(-0.5);
         Runtime.reset();
     }
 
@@ -142,9 +142,9 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             sleep(700);
             arm.setPower(0.0);
             //automated
-            flickerServo.setPosition(-0.7);
+            flickerServo.setPosition(0.7);
             sleep(500);
-            flickerServo.setPosition(0.5);
+            flickerServo.setPosition(-0.5);
             sleep(700);
             arm.setPower(0.6);
             sleep(600);
@@ -152,20 +152,20 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
 
         }
-//Paddle Servo
-        if(gamepad2.right_trigger == 1){
-            paddleServo.setPosition(-0.5);
-        }
-        else if (gamepad2.right_trigger == 0) {
-            paddleServo.setPosition(0.5);
-        }
-//Flicker Servo
-        if(gamepad2.left_trigger == 1){
-            flickerServo.setPosition(-0.5);
-        }
-        else if (gamepad2.left_trigger == 0) {
-            flickerServo.setPosition(0.5);
-        }
+        //Paddle Servo
+        //if(gamepad2.right_trigger == 1){
+        //paddleServo.setPosition(-0.5);
+        //}
+        //else if (gamepad2.right_trigger == 0) {
+        //paddleServo.setPosition(0.5);
+        //}
+        //Flicker Servo
+        //if(gamepad2.left_trigger == 1){
+        //flickerServo.setPosition(-0.5);
+        //}
+        //else if (gamepad2.left_trigger == 0) {
+        //flickerServo.setPosition(0.5);
+        //}
 
         if (gamepad2.dpad_down) {
             arm.setPower(-0.5);
@@ -183,10 +183,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         lastDown = gamepad1.dpad_down;
 
         if (gamepad1.a) {//intake on
-//            starSpeed=starSpeed*-1;
             intakeStars.setPower(0.5);
             armWheels.setPower(aWheelSpeed);
-            //rollerServo.setDirection(Servo.Direction.FORWARD);
             rollerServo.setPosition(1);
             upperRoller.setPosition(0);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
@@ -195,7 +193,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
         }
         if(gamepad1.b){//intake reverse
-            intakeStars.setPower(1);
+            intakeStars.setPower(-0.5);
             armWheels.setPower(1);
             rollerServo.setPosition(0);
             upperRoller.setPosition(1);
