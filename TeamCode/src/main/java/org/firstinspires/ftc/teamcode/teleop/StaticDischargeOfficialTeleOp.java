@@ -187,7 +187,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if (gamepad1.a) {//intake on
             intakeStars.setPower(0.5);
             armWheels.setPower(aWheelSpeed);
-            //rollerServo.setPosition(1);
+            rollerServo.setPower(1);
             upperRoller.setPosition(0);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
             telemetry.addData("Intake:", true);
