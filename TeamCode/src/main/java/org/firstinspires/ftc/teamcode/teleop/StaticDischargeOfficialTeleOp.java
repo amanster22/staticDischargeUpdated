@@ -25,7 +25,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public DcMotor intakeStars = null;
     public DcMotor armWheels = null;
     public DcMotor arm = null;
-    public Servo rollerServo = null;
+    public CRServo rollerServo = null;
     public Servo cameraServo=null;
     public Servo upperRoller = null;
     //    public Servo leftLatchServo=null;
@@ -58,7 +58,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         //carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
-        rollerServo = hardwareMap.servo.get("rollerS");
+        rollerServo = hardwareMap.crservo.get("rollerS");
 //        rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
@@ -101,9 +101,11 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public void loopRobot() {
         if (Runtime.time() >= 40)
         {
-            telemetry.addData("20 seconds left until End Game", "YAY!");
-            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
+            telemetry.addData("END GAME!", ":)");
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_OCEAN_PALETTE);
+
         }
+
         double vert = 0;
         double hori = 0;
         double turn = 0;
@@ -133,7 +135,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         }
 
         if(gamepad2.dpad_up){
-            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_OCEAN_PALETTE);
+            lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_OCEAN_PALETTE);
             frontLeftMotor.setPower(0);
             frontRightMotor.setPower(0);
             backLeftMotor.setPower(0);
@@ -153,7 +155,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
         }
         //Paddle Servo
-        //if(gamepad2.right_trigger == 1){
+        //if(gamepad2.right_trigger == 1){z
         //paddleServo.setPosition(-0.5);
         //}
         //else if (gamepad2.right_trigger == 0) {
@@ -185,7 +187,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if (gamepad1.a) {//intake on
             intakeStars.setPower(0.5);
             armWheels.setPower(aWheelSpeed);
-            rollerServo.setPosition(1);
+            //rollerServo.setPosition(1);
             upperRoller.setPosition(0);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
             telemetry.addData("Intake:", true);
@@ -195,7 +197,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if(gamepad1.b){//intake reverse
             intakeStars.setPower(-0.5);
             armWheels.setPower(1);
-            rollerServo.setPosition(0);
+            //rollerServo.setPosition(0);
             upperRoller.setPosition(1);
             telemetry.addData("Intake:", false);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
@@ -203,7 +205,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-            rollerServo.setPosition(-0.5);
+            //rollerServo.setPosition(-0.5);
             upperRoller.setPosition(-0.5);
             telemetry.addData("Intake:", false);
         }
