@@ -42,6 +42,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public ElapsedTime Runtime = new ElapsedTime();
     private DistanceSensor sensorRange;
     public RevBlinkinLedDriver lights;
+    public DcMotor capping = null;
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -72,6 +73,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         telemetry.addData("Servo Pos", paddleServo.getPosition());
         telemetry.update();
         lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+        capping = hardwareMap.dcMotor.get("cap");
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
@@ -140,7 +142,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             frontRightMotor.setPower(0);
             backLeftMotor.setPower(0);
             backRightMotor.setPower(0);
-            arm.setPower(-0.5);
+            arm.setPower(-0.4);
             sleep(700);
             arm.setPower(0.0);
             //automated
@@ -235,7 +237,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
 
         }
-
+        capping.setPower(.3 * gamepad2.right_stick_y);
     }
 
     /*

@@ -6,58 +6,29 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Disabled
 @TeleOp(name = "Avneesh Testing", group = "Linear OpMode")
 public class zHopefullyNotFailure extends OpMode {
 
-    public Servo dumping = null; //does this work
-    public DcMotor spinny = null;
-    public DcMotor intakeStars = null;
-    public DcMotor intakeBase = null;
-    double whichSpeed = 1.0;
+    public DcMotor capping = null;
+    public Servo cappingServo = null;
 
-    boolean lastUp = true;
-    boolean lastDown = true;
 
     @Override
     public void init() {
-        //dumping = (Servo) hardwareMap.get("arm");
-        spinny = (DcMotor) hardwareMap.get("flywheel");
-        intakeStars = (DcMotor) hardwareMap.get("inStar");
-        intakeBase = (DcMotor) hardwareMap.get("inBelt");
+
+        capping = hardwareMap.dcMotor.get("cap");
+        cappingServo = hardwareMap.servo.get("capServo");
 
     }
 
     @Override
     public void loop() {
-//        if (gamepad1.a) {
-//            dumping.setPosition(0);
-//        } else if (gamepad1.b)
-//        {
-//            dumping.setPosition(.6);
-//        }
-//        spinny.setPower(gamepad1.left_stick_y * whichSpeed);
-//
-//        if (gamepad1.dpad_up && !lastUp) {
-//            whichSpeed = (whichSpeed + .1);
-//        }
-//        if (gamepad1.dpad_down && !lastDown) {
-//            whichSpeed = (whichSpeed - .1);
-//        }
-//
-//        telemetry.addData("speed", whichSpeed);
-//        telemetry.update();
-//
-//        lastUp = gamepad1.dpad_up;
-//        lastDown = gamepad1.dpad_down;
+        double stick = gamepad2.left_stick_y;
+        capping.setPower(.4 * gamepad2.right_stick_y);
 
-        if (gamepad2.a) {
-            intakeBase.setPower(-.75);
-            intakeStars.setPower(.75);
-        }
-        if (gamepad2.b) {
-            intakeBase.setPower(0);
-            intakeStars.setPower(-0);
-        }
+        telemetry.addData("Value", stick);
+        telemetry.update();
+        cappingServo.setPosition(gamepad2.left_stick_y);
+
     }//the loop ends here
 }
