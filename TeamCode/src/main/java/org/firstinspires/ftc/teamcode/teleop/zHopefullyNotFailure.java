@@ -28,7 +28,11 @@ public class zHopefullyNotFailure extends OpMode {
 
         telemetry.addData("Value", stick);
         telemetry.update();
-        cappingServo.setPosition(gamepad2.left_stick_y);
-
+        if (gamepad2.dpad_up) {
+            cappingServo.setPosition(1);
+        }
+        else if (gamepad2.dpad_down) {
+            cappingServo.setPosition(0.8);
+        }
     }//the loop ends here
 }
