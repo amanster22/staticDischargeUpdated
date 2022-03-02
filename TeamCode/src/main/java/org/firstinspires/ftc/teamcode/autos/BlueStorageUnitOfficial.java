@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autos;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -25,7 +26,7 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
      * Initilizations of all of hardware
      */
     public StaticDischargeBot1 bot;
-    public DcMotor carouselWheel = null;
+    public CRServo carouselWheel = null;
     //public Servo leftLatchServo=null;
     //public Servo rightLatchServo = null;
     public DcMotor arm = null;
@@ -86,7 +87,6 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         carouselWheel.setPower(-0.5);
         sleep(3000);
         carouselWheel.setPower(0);
-        sleep(250);
 
         bot.driveTrain.moveEncoders(33.75, 0, 0, 0.6);
         sleep(500);
@@ -113,19 +113,18 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 31, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(13.75, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(14, 0, 0, 0.3);
         sleep(500);
 
     }
 
     public void path2() {
         // Middle Level
-        bot.driveTrain.moveEncoders(11, 0, 0, 0.2);
+        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
+        sleep(1000);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.4);
-        sleep(500);
-
-        bot.driveTrain.moveEncoders(-2.95, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
         sleep(500);
         carouselWheel.setPower(-0.5);
         sleep(3000);
@@ -138,7 +137,7 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, 0, 0.66, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -2.89, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -3.7, 0, 0.2);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
@@ -155,21 +154,20 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 25.75, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(14.5, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(15, 0, 0, 0.3);
         sleep(500);
     }
 
     public void path1() {
         // Lowest Level
-        bot.driveTrain.moveEncoders(10.9, 0, 0, 0.3);
-        sleep(800);
-        bot.driveTrain.moveEncoders(0, -27.25, 0, 0.5);
-        sleep(800);
-
-        bot.driveTrain.moveEncoders(-2.9, 0, 0, 0.2);
-        sleep(800);
+        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
+        sleep(1000);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
+        sleep(500);
+        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
+        sleep(500);
         carouselWheel.setPower(-0.5);
-        sleep(3000);
+        sleep(6000);
         carouselWheel.setPower(0);
         bot.driveTrain.moveEncoders(34, 0, 0, 0.4);
         sleep(500);
@@ -196,19 +194,20 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 26, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(15.25, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(15.35, 0, 0, 0.3);
         sleep(500);
     }
 
     public void runOpMode() {
-        bot = new StaticDischargeBot1(telemetry, hardwareMap);
-        carouselWheel = hardwareMap.dcMotor.get("wheel");
+
+        carouselWheel = hardwareMap.get(CRServo.class, "wheel");
         //rightLatchServo = hardwareMap.servo.get("rightlatch");
 
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         upperRoller = hardwareMap.servo.get("roller2");
+        bot = new StaticDischargeBot1(telemetry, hardwareMap);
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
         pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         blinkinLedDriver.setPattern(pattern);
@@ -218,7 +217,7 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         initTfod();
 
         //rightLatchServo.setPosition(0.5);
-        flickerServo.setPosition(0.5);
+        //flickerServo.setPosition(0.5);
 
         /**
          * Activate TensorFlow Object Detection before we wait for the start command.

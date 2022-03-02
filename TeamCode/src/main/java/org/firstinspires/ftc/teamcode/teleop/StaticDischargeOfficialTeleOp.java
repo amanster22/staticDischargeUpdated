@@ -18,6 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
     public DcMotor frontLeftMotor = null;
+    public DcMotor capping = null;
+    public Servo cappingServo = null;
     public DcMotor frontRightMotor = null;
     public DcMotor backLeftMotor = null;
     public DcMotor backRightMotor = null;
@@ -30,7 +32,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public Servo upperRoller = null;
     //    public Servo leftLatchServo=null;
 //    public Servo rightLatchServo=null;
-    public Servo paddleServo=null;
+    //public Servo paddleServo=null;
     public Servo flickerServo=null;
     public CRServo carouselWheel = null;
     //public DcMotor carouselWheel = null;
@@ -42,7 +44,6 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
     public ElapsedTime Runtime = new ElapsedTime();
     private DistanceSensor sensorRange;
     public RevBlinkinLedDriver lights;
-    public DcMotor capping = null;
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -51,6 +52,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
+        capping = hardwareMap.dcMotor.get("cap");
+        cappingServo = hardwareMap.servo.get("capServo");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
         backLeftMotor = hardwareMap.dcMotor.get("2");
@@ -64,13 +67,13 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
         arm = hardwareMap.dcMotor.get("arm");
-        paddleServo = hardwareMap.servo.get("paddle");
+        //paddleServo = hardwareMap.servo.get("paddle");
         flickerServo = hardwareMap.servo.get("flicker");
         cameraServo=hardwareMap.servo.get("camera");
         upperRoller=hardwareMap.servo.get("roller2");
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hey Avneesh and Daniel. Lets go!");    //
-        telemetry.addData("Servo Pos", paddleServo.getPosition());
+        //telemetry.addData("Servo Pos", paddleServo.getPosition());
         telemetry.update();
         lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
         capping = hardwareMap.dcMotor.get("cap");
@@ -116,6 +119,11 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
         boolean clawOpen = false;
         boolean clawClose = false;
+        double stick = gamepad2.left_stick_y;
+        capping.setPower(.4 * gamepad2.right_stick_y);
+
+        telemetry.addData("Value", stick);
+        telemetry.update();
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         vert = gamepad1.left_stick_y;
@@ -135,7 +143,12 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             speedUpdate = 1;
             telemetry.addData("Say", "Speed:normal");
         }
-
+        if (gamepad1.dpad_up) {
+            cappingServo.setPosition(1);
+        }
+        else if (gamepad1.dpad_down) {
+            cappingServo.setPosition(0.6);
+        }
         if(gamepad2.dpad_up){
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_OCEAN_PALETTE);
             frontLeftMotor.setPower(0);
@@ -174,8 +187,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if (gamepad2.dpad_down) {
             arm.setPower(-0.5);
             sleep(200);
-            arm.setPower(0.4);
-            arm.setPower(0);
+            arm.setPower(0.2);
         }
 
         carouselWheel.setPower(.6 * gamepad2.left_stick_y);
