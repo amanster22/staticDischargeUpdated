@@ -4,6 +4,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -20,7 +21,7 @@ import java.util.List;
 public class RedStorageUnitOffical extends LinearOpMode {
 
     public StaticDischargeBot1 bot;
-    public DcMotor carouselWheel = null;
+    public CRServo carouselWheel = null;
     //    public Servo leftLatchServo=null;
     //public Servo rightLatchServo = null;
     public DcMotor arm = null;
@@ -77,9 +78,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         arm.setPower(-0.5);
         sleep(1600);
-        flickerServo.setPosition(-0.5);
+        flickerServo.setPosition(0.5);
         sleep(1000);
-        flickerServo.setPosition(0.55);
+        flickerServo.setPosition(-0.55);
         sleep(500);
         arm.setPower(0.3);
         sleep(700);
@@ -112,9 +113,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1000);
         arm.setPower(-0.5);
         sleep(1600);
-        flickerServo.setPosition(-0.5);
+        flickerServo.setPosition(0.5);
         sleep(1000);
-        flickerServo.setPosition(0.55);
+        flickerServo.setPosition(-0.55);
         sleep(500);
         arm.setPower(0.3);
 
@@ -144,9 +145,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, -27.5, 0, 0.4);
         sleep(500);
-        flickerServo.setPosition(-0.5);
+        flickerServo.setPosition(0.5);
         sleep(1000);
-        flickerServo.setPosition(0.55);
+        flickerServo.setPosition(-0.55);
         sleep(1000);
         arm.setPower(-0.5);
         sleep(600);
@@ -164,7 +165,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
     }
     public void runOpMode() {
         bot = new StaticDischargeBot1(telemetry, hardwareMap);
-        carouselWheel = hardwareMap.dcMotor.get("wheel");
+        carouselWheel = hardwareMap.crservo.get("wheel");
         //rightLatchServo = hardwareMap.servo.get("rightlatch");
 
         arm = hardwareMap.dcMotor.get("arm");
@@ -179,9 +180,9 @@ public class RedStorageUnitOffical extends LinearOpMode {
         initVuforia();
         initTfod();
 
-        //rightLatchServo.setPosition(0.5);
+        //rightLatchServo.setPosition(-0.5);
 
-        flickerServo.setPosition(0.5);
+        flickerServo.setPosition(-0.5);
 
         if (tfod != null) {
             tfod.activate();
