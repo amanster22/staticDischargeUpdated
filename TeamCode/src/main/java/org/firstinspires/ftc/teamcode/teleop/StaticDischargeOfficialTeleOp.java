@@ -232,7 +232,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         }
 //        capping.setPower(.3 * gamepad2.right_stick_y);
     }
-//try again
+//try agai
     /*
      * Code to run ONCE after the driver hits STOP
      */
