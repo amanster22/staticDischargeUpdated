@@ -78,33 +78,34 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
     public void path3() {
 
         //Pathing to the carousel wheel
-        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
-        sleep(1000);
-        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
+        bot.driveTrain.moveEncoders(11.1, 0, 0, 0.27);
+        sleep(800);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-2.4, 0, 0, 0.3);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(3000);
+        carouselWheel.setPower(0.5);
+        sleep(4000);
         carouselWheel.setPower(0);
+        sleep(250);
 
-        bot.driveTrain.moveEncoders(33.75, 0, 0, 0.6);
+        bot.driveTrain.moveEncoders(33.55, 0, 0, 0.6);
         sleep(500);
         //bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
         //sleep(200);
         bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
+        bot.driveTrain.moveEncoders(0, 0, 0.67, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -9, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -10, 0,  0.2);
         sleep(2000);
         arm.setPower(-0.5);
         sleep(1000);
         arm.setPower(0.0);
-        sleep(1000);
-        flickerServo.setPosition(-0.5);
-        sleep(1000);
+        sleep(500);
         flickerServo.setPosition(0.5);
+        sleep(1000);
+        flickerServo.setPosition(-0.7);
         sleep(500);
         arm.setPower(0.3);
         sleep(500);
@@ -113,39 +114,42 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 31, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(14, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(14.5, 0, 0, 0.3);
         sleep(500);
 
     }
 
     public void path2() {
         // Middle Level
-        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
-        sleep(1000);
-        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
+        //Pathing to the carousel wheel
+        bot.driveTrain.moveEncoders(11.1, 0, 0, 0.27);
+        sleep(800);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-2.4, 0, 0, 0.3);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(3000);
+        carouselWheel.setPower(0.5);
+        sleep(4000);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(33, 0, 0, 0.6);
+        sleep(250);
+
+        bot.driveTrain.moveEncoders(35, 0, 0, 0.6);
         sleep(500);
 //        bot.driveTrain.moveEncoders(0, 0, 0.03, 0.8);
 //        sleep(200);
         bot.driveTrain.moveEncoders(0, 24.5, 0, 0.5);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.4);
+        bot.driveTrain.moveEncoders(0, 0, 0.67, 0.6);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, -3.7, 0, 0.2);
+        bot.driveTrain.moveEncoders(0, -3.1, 0, 0.2);
         sleep(500);
         arm.setPower(-0.5);
         sleep(1000);
         arm.setPower(0.0);
         sleep(1000);
-        flickerServo.setPosition(-0.5);
-        sleep(1000);
         flickerServo.setPosition(0.5);
+        sleep(1000);
+        flickerServo.setPosition(-0.7);
         sleep(500);
         arm.setPower(0.3);
         sleep(500);
@@ -154,33 +158,35 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 25.75, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(15, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(14.75, 0, 0, 0.3);
         sleep(500);
     }
 
     public void path1() {
         // Lowest Level
-        bot.driveTrain.moveEncoders(11.25, 0, 0, 0.1);
-        sleep(1000);
-        bot.driveTrain.moveEncoders(0, -28, 0, 0.3);
+        //Pathing to the carousel wheel
+        bot.driveTrain.moveEncoders(11.1, 0, 0, 0.27);
+        sleep(800);
+        bot.driveTrain.moveEncoders(0, -28, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(-3.5, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(-2.4, 0, 0, 0.3);
         sleep(500);
-        carouselWheel.setPower(-0.5);
-        sleep(6000);
+        carouselWheel.setPower(0.5);
+        sleep(4000);
         carouselWheel.setPower(0);
-        bot.driveTrain.moveEncoders(34, 0, 0, 0.4);
-        sleep(500);
+        sleep(250);
 
-        bot.driveTrain.moveEncoders(0, 24.5, 0, 0.6);
+        bot.driveTrain.moveEncoders(32.9, 0, 0, 0.6);
+        sleep(800);
+        bot.driveTrain.moveEncoders(0, 24.5, 0, 0.4);
         sleep(500);
-        bot.driveTrain.moveEncoders(0, 0, 0.66, 0.6);
-        sleep(1000);
-        bot.driveTrain.moveEncoders(0, -5, 0, 0.4);
+        bot.driveTrain.moveEncoders(0, 0, 0.67, 0.5);
+        sleep(500);
+        bot.driveTrain.moveEncoders(0, -6, 0, 0.4);
         sleep(300);
-        flickerServo.setPosition(-0.5);
+        flickerServo.setPosition(0.5);
         sleep(1000);
-        flickerServo.setPosition(0.55);
+        flickerServo.setPosition(-0.7);
         sleep(1000);
         arm.setPower(-0.5);
         sleep(800);
@@ -194,20 +200,19 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         bot.driveTrain.moveEncoders(0, 26, 0, 0.3);
         sleep(500);
 
-        bot.driveTrain.moveEncoders(15.35, 0, 0, 0.3);
+        bot.driveTrain.moveEncoders(16, 0, 0, 0.3);
         sleep(500);
     }
 
     public void runOpMode() {
-
-        carouselWheel = hardwareMap.get(CRServo.class, "wheel");
+        bot = new StaticDischargeBot1(telemetry, hardwareMap);
+        carouselWheel = hardwareMap.crservo.get("wheel");
         //rightLatchServo = hardwareMap.servo.get("rightlatch");
 
         arm = hardwareMap.dcMotor.get("arm");
         cameraServo = hardwareMap.servo.get("camera");
         flickerServo = hardwareMap.servo.get("flicker");
         upperRoller = hardwareMap.servo.get("roller2");
-        bot = new StaticDischargeBot1(telemetry, hardwareMap);
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
         pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         blinkinLedDriver.setPattern(pattern);
@@ -216,8 +221,8 @@ public class BlueStorageUnitOfficial extends LinearOpMode {
         initVuforia();
         initTfod();
 
-        //rightLatchServo.setPosition(0.5);
-        //flickerServo.setPosition(0.5);
+        //rightLatchServo.setPosition(-0.5);
+        flickerServo.setPosition(-0.5);
 
         /**
          * Activate TensorFlow Object Detection before we wait for the start command.
