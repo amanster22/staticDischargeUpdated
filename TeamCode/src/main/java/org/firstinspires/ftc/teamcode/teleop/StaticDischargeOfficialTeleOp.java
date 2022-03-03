@@ -18,8 +18,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
     public DcMotor frontLeftMotor = null;
-    public DcMotor capping = null;
-    public Servo cappingServo = null;
+    //    public DcMotor capping = null;
+    public DcMotor intakeTop = null;
+    //    public Servo cappingServo = null;
     public DcMotor frontRightMotor = null;
     public DcMotor backLeftMotor = null;
     public DcMotor backRightMotor = null;
@@ -52,8 +53,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         lights=hardwareMap.get(RevBlinkinLedDriver.class,"lights");
-        capping = hardwareMap.dcMotor.get("cap");
-        cappingServo = hardwareMap.servo.get("capServo");
+//        capping = hardwareMap.dcMotor.get("cap");
+//        cappingServo = hardwareMap.servo.get("capServo");
         frontLeftMotor = hardwareMap.dcMotor.get("1");
         frontRightMotor = hardwareMap.dcMotor.get("0");
         backLeftMotor = hardwareMap.dcMotor.get("2");
@@ -62,7 +63,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         //carouselWheel = hardwareMap.dcMotor.get("wheel");
         intakeStars = hardwareMap.dcMotor.get("stars");
         armWheels = hardwareMap.dcMotor.get("armwheel");
-        rollerServo = hardwareMap.crservo.get("rollerS");
+        intakeTop = hardwareMap.dcMotor.get("inTop");
+//        rollerServo = hardwareMap.crservo.get("rollerS");
 //        rightLatchServo = hardwareMap.servo.get("rightlatch");
 //        leftLatchServo = hardwareMap.servo.get("leftlatch");
         sensorRange = hardwareMap.get(DistanceSensor.class, "range");
@@ -76,7 +78,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         //telemetry.addData("Servo Pos", paddleServo.getPosition());
         telemetry.update();
         lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
-        capping = hardwareMap.dcMotor.get("cap");
+//        capping = hardwareMap.dcMotor.get("cap");
     }
     /*     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
@@ -84,7 +86,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 //        rightLatchServo.setPosition(-0.8);
 
         //paddleServo.setPosition(-0.5);
-        cameraServo.setPosition(-1);
+//        cameraServo.setPosition(-1);
     }
 
     /*
@@ -96,7 +98,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         intakeStars.setPower(0);
 //        leftLatchServo.setPosition(-0.5);
         //paddleServo.setPosition(-0.5);
-        flickerServo.setPosition(-0.5);
+//        flickerServo.setPosition(-0.5);
         Runtime.reset();
     }
 
@@ -120,7 +122,7 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         boolean clawOpen = false;
         boolean clawClose = false;
         double stick = gamepad2.left_stick_y;
-        capping.setPower(.4 * gamepad2.right_stick_y);
+//        capping.setPower(.4 * gamepad2.right_stick_y);
 
         telemetry.addData("Value", stick);
         telemetry.update();
@@ -131,10 +133,6 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         turn = -1 * gamepad1.right_stick_x;
 
 
-//        clawOpen = gamepad2.right_bumper;
-//        clawClose = gamepad2.left_bumper;
-
-
         if (gamepad1.right_bumper) {
             speedUpdate = 0.2;
             telemetry.addData("Say", "Speed:slow");
@@ -143,12 +141,12 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             speedUpdate = 1;
             telemetry.addData("Say", "Speed:normal");
         }
-        if (gamepad1.dpad_up) {
-            cappingServo.setPosition(1);
-        }
-        else if (gamepad1.dpad_down) {
-            cappingServo.setPosition(0.6);
-        }
+//        if (gamepad1.dpad_up) {
+//            cappingServo.setPosition(1);
+//        }
+//        else if (gamepad1.dpad_down) {
+//            cappingServo.setPosition(0.6);
+//        }
         if(gamepad2.dpad_up){
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_OCEAN_PALETTE);
             frontLeftMotor.setPower(0);
@@ -169,20 +167,6 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
 
 
         }
-        //Paddle Servo
-        //if(gamepad2.right_trigger == 1){z
-        //paddleServo.setPosition(-0.5);
-        //}
-        //else if (gamepad2.right_trigger == 0) {
-        //paddleServo.setPosition(0.5);
-        //}
-        //Flicker Servo
-        //if(gamepad2.left_trigger == 1){
-        //flickerServo.setPosition(-0.5);
-        //}
-        //else if (gamepad2.left_trigger == 0) {
-        //flickerServo.setPosition(0.5);
-        //}
 
         if (gamepad2.dpad_down) {
             arm.setPower(-0.5);
@@ -201,7 +185,8 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if (gamepad1.a) {//intake on
             intakeStars.setPower(0.5);
             armWheels.setPower(aWheelSpeed);
-            rollerServo.setPower(1);
+
+            intakeTop.setPower(-0.75);
             upperRoller.setPosition(0);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
             telemetry.addData("Intake:", true);
@@ -211,26 +196,22 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         if(gamepad1.b){//intake reverse
             intakeStars.setPower(-0.5);
             armWheels.setPower(1);
-            //rollerServo.setPosition(0);
+
             upperRoller.setPosition(1);
+            intakeTop.setPower(0.5);
             telemetry.addData("Intake:", false);
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
         }
         if(gamepad1.x){//intake off
             intakeStars.setPower(0);
             armWheels.setPower(0);
-            //rollerServo.setPosition(-0.5);
+            intakeTop.setPower(0);
+
             upperRoller.setPosition(-0.5);
             telemetry.addData("Intake:", false);
         }
 
-//        if(gamepad1.x){
-//            latchServo.setPosition(0.5);
-//        }
-//        if(gamepad1.y){
-//            latchServo.setPosition(-0.5);
-//        }
-        //Holonomic Drivetrain code
+
         frontLeftMotor.setPower(-speedUpdate * (vert + hori + turn));
         backLeftMotor.setPower(-speedUpdate * (vert - hori + turn));
         frontRightMotor.setPower(speedUpdate * (vert - hori - turn));
@@ -249,9 +230,9 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
             lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.CONFETTI);
 
         }
-        capping.setPower(.3 * gamepad2.right_stick_y);
+//        capping.setPower(.3 * gamepad2.right_stick_y);
     }
-
+    //try agai
     /*
      * Code to run ONCE after the driver hits STOP
      */
@@ -270,6 +251,3 @@ public class StaticDischargeOfficialTeleOp extends LinearOpMode {
         stopRobot();
     }
 }
-
-
-
