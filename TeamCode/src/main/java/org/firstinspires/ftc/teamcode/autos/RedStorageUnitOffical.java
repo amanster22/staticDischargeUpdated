@@ -65,7 +65,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, -6.8, 0, 0.3);
         sleep(500);
-        carouselWheel.setPower(0.475);
+        carouselWheel.setPower(-0.475);
         sleep(3200);
         carouselWheel.setPower(0);
         sleep(500);
@@ -82,10 +82,11 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1000);
         flickerServo.setPosition(-0.55);
         sleep(500);
-        arm.setPower(0.3);
-        sleep(700);
+
         bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
         sleep(500);
+        arm.setPower(0.3);
+        sleep(700);
         bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
 
@@ -100,7 +101,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
         sleep(500);
-        carouselWheel.setPower(0.475);
+        carouselWheel.setPower(-0.475);
         sleep(3200);
         carouselWheel.setPower(0);
         sleep(500);
@@ -117,11 +118,10 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(1000);
         flickerServo.setPosition(-0.55);
         sleep(500);
-        arm.setPower(0.3);
-
-        sleep(700);
         bot.driveTrain.moveEncoders(0, 26, 0, 0.3);
         sleep(500);
+        arm.setPower(0.3);
+        sleep(700);
         bot.driveTrain.moveEncoders(-11.75, 0, 0, 0.3);
         sleep(500);
     }
@@ -134,7 +134,7 @@ public class RedStorageUnitOffical extends LinearOpMode {
         sleep(500);
         bot.driveTrain.moveEncoders(0, -6.8, 0, 0.4);
         sleep(500);
-        carouselWheel.setPower(0.475);
+        carouselWheel.setPower(-0.475);
         sleep(3200);
         carouselWheel.setPower(0);
         sleep(500);
@@ -156,10 +156,11 @@ public class RedStorageUnitOffical extends LinearOpMode {
 
         upperRoller.setPosition(0);
         sleep(1000);
-        arm.setPower(0.3);
-        sleep(700);
+
         bot.driveTrain.moveEncoders(0, 28.75, 0, 0.4);
         sleep(500);
+        arm.setPower(0.3);
+        sleep(700);
         bot.driveTrain.moveEncoders(-11.5, 0, 0, 0.4);
         sleep(500);
     }
